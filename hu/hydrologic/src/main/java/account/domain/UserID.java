@@ -1,4 +1,4 @@
-package hydrologic.src.main.java.account.domain;
+package account.domain;
 
 public class UserID {
     private final String id;

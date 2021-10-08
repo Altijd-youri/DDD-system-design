@@ -1,3 +1,3 @@
-package hydrologic.src.main.java.account.domain;
+package account.domain;
 
 public enum Role {}

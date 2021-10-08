@@ -1,4 +1,4 @@
-package hydrologic.src.main.java.account.domain;
+package account.domain;
 
 public class Address {
     private final String city;

@@ -1,4 +1,4 @@
-package hydrologic.src.main.java.account.domain;
+package account.domain;
 
 public class Email {
     private final String email;

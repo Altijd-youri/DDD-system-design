@@ -1,4 +1,4 @@
-package hydrologic.src.main.java.account.domain;
+package account.domain;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,4 +19,4 @@ public class User {
         this.lastName = lastName;
         this.savedLocationIDs = new HashSet<>();
     }
-};
+}
