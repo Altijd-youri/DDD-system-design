@@ -1,9 +1,9 @@
 package weatherEvent.domain;
 
-public class WeatherEventIdentity {
+public class WeatherEventID {
     private final String id;
 
-    public WeatherEventIdentity(String id) {
+    public WeatherEventID(String id) {
         this.id = id;
     }
 }

@@ -1,14 +1,18 @@
 package weatherEvent.Application;
 
-import weatherEvent.domain.Measurement;
+import weatherEvent.domain.*;
+import weatherEvent.port.adapter.persistence.WeatherEventRepositoryImpl;
 
 import java.util.List;
-import java.util.UUID;
 
 public class WeatherEventApplicationService {
+    WeatherEventRepository weatherEventRepository = new WeatherEventRepositoryImpl();
 
-    public UUID newWeatherEvent(UUID Uid, double longitude, double latitude, List<Measurement> measurements) {
+    public WeatherEventID newWeatherEvent(UserID Uid, double longitude, double latitude, List<Measurement> measurements) {
+        WeatherEvent event = weatherEventRepository.createNewEventByUserId(Uid);
+
         // Should be implemented by Milan, StationApplicationService (by Youri) depends on this implementation.
-        return UUID.fromString("mocked UUID, while not implemented.");
+        //return UserID.fromString("mocked UUID, while not implemented.");
+        return event.getId();
     }
 }
