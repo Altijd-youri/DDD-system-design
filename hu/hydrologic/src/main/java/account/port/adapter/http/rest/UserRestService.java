@@ -1,11 +1,17 @@
-package hydrologic.src.main.java.account.port.adapter.http.rest;
+package account.port.adapter.http.rest;
 
-import hydrologic.src.main.java.account.application.UserApplicationService;
+import account.application.UserApplicationService;
+
 
 public class UserRestService {
     UserApplicationService userApplicationService = new UserApplicationService();
+
+    public void userAddSavedLocation(String langitude, String longitude, String name, String userID) {
+        userApplicationService.userAddSavedLocation(langitude,longitude,name,userID);
+    }
 
     public void addUserToCompany(String userID, String companyID) {
         userApplicationService.addUserToCompany(userID, companyID);
     }
 }
+
