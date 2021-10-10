@@ -1,3 +1,6 @@
 package account.domain;
 
-public enum Role {}
+public enum Role {
+    User,
+    Employee;
+}

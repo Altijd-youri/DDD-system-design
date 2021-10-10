@@ -26,4 +26,7 @@ public class User {
         savedLocationRepository.store(savedLocation);
     }
 
+    public UserID getUserID() {
+        return userID;
+    }
 }
