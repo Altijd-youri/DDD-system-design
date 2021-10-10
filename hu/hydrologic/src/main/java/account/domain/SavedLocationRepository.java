@@ -1,6 +1,7 @@
 package account.domain;
 
 public interface SavedLocationRepository {
-    public void store(SavedLocation savedLocation);
-    public User getUser(String id);
+    boolean store(SavedLocation savedLocation);
+    boolean update(SavedLocation savedLocation);
+    SavedLocation get(SavedLocationID id);
 }
