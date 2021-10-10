@@ -1,15 +1,23 @@
-package hydrologic.src.main.java.account.application;
+package account.application;
 
-import hydrologic.src.main.java.account.domain.User;
-import hydrologic.src.main.java.account.domain.UserRepository;
-import hydrologic.src.main.java.account.port.adapter.persistence.FileUserRepository;
+import account.domain.CompanyID;
+import account.domain.User;
+import account.domain.UserID;
+import account.domain.UserRepository;
+import account.port.adapter.persistence.MemoryUserRepository;
 
 public class UserApplicationService {
-    UserRepository userRepository = new FileUserRepository();
+    private final UserRepository userRepository = new MemoryUserRepository();
 
-    public void addUserToCompany(String userID, String companyID) {
-        User user = userRepository.getUser(userID);
-        user.setCompany(companyID);
-        userRepository.store(user);
+    public void userAddSavedLocation(String latitude, String longitude, String name, String userID) {
+        User user = userRepository.get(new UserID(userID));
+        user.createSavedLocation(latitude,longitude,name);
+        userRepository.update(user);
     }
+  
+    public void addUserToCompany(String userID, String companyID) {
+          User user = userRepository.get(new UserID(userID));
+          user.setCompany(new CompanyID(companyID));
+          userRepository.update(user);
+      }
 }

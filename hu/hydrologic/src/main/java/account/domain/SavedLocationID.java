@@ -6,4 +6,9 @@ public class SavedLocationID {
     public SavedLocationID(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return id ;
+    }
 }
