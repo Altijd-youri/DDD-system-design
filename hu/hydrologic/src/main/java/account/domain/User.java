@@ -19,4 +19,7 @@ public class User {
         this.lastName = lastName;
         this.savedLocationIDs = new HashSet<>();
     }
+
+    public void setCompany(String companyID) {
+    }
 }
