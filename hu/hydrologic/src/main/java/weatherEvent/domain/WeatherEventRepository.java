@@ -1,5 +1,7 @@
 package weatherEvent.domain;
 
 public interface WeatherEventRepository {
-    WeatherEvent createNewEventByUserId(UserID Uid);
+    WeatherEvent get(WeatherEventID id);
+    boolean update(WeatherEvent updateEvent);
+    boolean store(WeatherEvent event);
 }
