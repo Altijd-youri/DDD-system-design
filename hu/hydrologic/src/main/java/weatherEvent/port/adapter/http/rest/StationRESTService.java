@@ -1,6 +1,6 @@
 package weatherEvent.port.adapter.http.rest;
 
-import weatherEvent.Application.StationApplicationService;
+import weatherEvent.application.StationApplicationService;
 
 import java.util.List;
 

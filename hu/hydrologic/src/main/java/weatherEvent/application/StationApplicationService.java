@@ -1,4 +1,4 @@
-package weatherEvent.Application;
+package weatherEvent.application;
 
 import weatherEvent.domain.*;
 import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
