@@ -6,4 +6,9 @@ public class MeasurementStationIdentity {
     public MeasurementStationIdentity(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
 }

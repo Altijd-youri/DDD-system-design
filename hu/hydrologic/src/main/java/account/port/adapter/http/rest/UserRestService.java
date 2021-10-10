@@ -1,6 +1,6 @@
-package hydrologic.src.main.java.account.port.adapter.http.rest;
+package account.port.adapter.http.rest;
 
-import hydrologic.src.main.java.account.application.UserApplicationService;
+import account.application.UserApplicationService;
 
 public class UserRestService {
     UserApplicationService userApplicationService = new UserApplicationService();

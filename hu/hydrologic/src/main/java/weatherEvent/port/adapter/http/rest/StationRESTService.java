@@ -1,5 +1,13 @@
 package weatherEvent.port.adapter.http.rest;
 
+import weatherEvent.Application.StationApplicationService;
+
+import java.util.List;
+
 public class StationRESTService {
-    //TODO - Youri: Implement
+    StationApplicationService applicationService = new StationApplicationService();
+
+    public void weatherEventOnStation(String Uid, String mStationId, List<List<String>> measurements) {
+        applicationService.weatherEventOnStation(Uid, mStationId, measurements);
+    }
 }

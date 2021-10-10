@@ -1,5 +1,7 @@
 package weatherEvent.domain;
 
 public interface MeasurementStationRepository {
-    //TODO - Youri: Implement
+    MeasurementStation stationOfUserById(UserID Uid, String mStationId);
+
+    String store(MeasurementStation mstation);
 }
