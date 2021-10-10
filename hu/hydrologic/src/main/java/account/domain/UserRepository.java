@@ -5,3 +5,4 @@ public interface UserRepository {
     public void update(User user);
     public User getUser(String id);
 }
+

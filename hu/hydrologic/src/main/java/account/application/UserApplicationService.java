@@ -11,4 +11,10 @@ public class UserApplicationService {
         user.createSavedLocation(langitude,longitude,name);
         userRepository.update(user);
     }
+  
+    public void addUserToCompany(String userID, String companyID) {
+          User user = userRepository.getUser(userID);
+          user.setCompany(companyID);
+          userRepository.store(user);
+      }
 }
