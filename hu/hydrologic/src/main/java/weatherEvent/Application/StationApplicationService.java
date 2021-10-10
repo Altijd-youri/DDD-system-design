@@ -1,13 +1,13 @@
 package weatherEvent.Application;
 
 import weatherEvent.domain.*;
-import weatherEvent.port.adapter.persistence.MeasurementStationRepositoryInMemoryImpl;
+import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StationApplicationService {
-    MeasurementStationRepository repository = new MeasurementStationRepositoryInMemoryImpl();
+    MeasurementStationRepository repository = new MemoryMeasurementStationRepository();
     WeatherEventApplicationService eventApplication = new WeatherEventApplicationService();
 
     public void weatherEventOnStation(String UidInput, String mStationId, List<List<String>> measurements) {

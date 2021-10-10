@@ -2,7 +2,7 @@ package weatherEvent.port.adapter.persistence;
 
 import weatherEvent.domain.*;
 
-public class MeasurementStationRepositoryInMemoryImpl implements MeasurementStationRepository {
+public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
     @Override
     public MeasurementStation stationOfUserById(UserID Uid, String mStationId) {
         //Mock
