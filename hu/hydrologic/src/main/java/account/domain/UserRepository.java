@@ -1,4 +1,4 @@
-package hydrologic.src.main.java.account.domain;
+package account.domain;
 
 public interface UserRepository {
     boolean store(User user);

@@ -22,12 +22,7 @@ public class WeatherEvent {
         return this.id;
     }
 
-    public WeatherEvent() {
-
-    }
-
-    public void addPicture(Byte[] image, String description, String userID){
-        User user = weatherEventService.getUserOfID(userID);
+    public void updatePicture(Byte[] image, String description, UserID userID){
         Picture picture = new Picture(image,description);
     }
 }

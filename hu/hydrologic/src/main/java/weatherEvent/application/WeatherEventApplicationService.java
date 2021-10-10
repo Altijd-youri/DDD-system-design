@@ -1,18 +1,27 @@
 package weatherEvent.application;
 
-import account.domain.User;
-import account.domain.UserID;
-import weatherEvent.domain.Picture;
-import weatherEvent.domain.WeatherEvent;
-import weatherEvent.domain.WeatherEventRepository;
-import weatherEvent.port.adapter.persistence.FileWeatherEventRepository;
+import weatherEvent.domain.*;
+import weatherEvent.port.adapter.persistence.MemoryWeatherEventRepository;
+
+import java.util.Date;
+import java.util.List;
 
 public class WeatherEventApplicationService {
-    WeatherEventRepository weatherEventRepository;
+    WeatherEventRepository weatherEventRepository = new MemoryWeatherEventRepository();
 
-    public void userAddPicture(String userID, Byte[] picture, String description){
-        WeatherEvent weatherEvent = new WeatherEvent();
-        weatherEvent.addPicture(picture, description, userID);
-        weatherEventRepository.store(weatherEvent);
+    public WeatherEventID newWeatherEvent(UserID Uid, double longitude, double latitude, List<Measurement> measurements) {
+        Date currDate = new Date();
+        WeatherEventID eventID = new WeatherEventID(currDate, Uid);
+        WeatherEvent event = new WeatherEvent(eventID, Uid, measurements, new Location(longitude, latitude), currDate);
+        weatherEventRepository.store(event);
+        return event.getId();
+    }
+
+    public void updatePicture(UserID uid, String description, String weathereventID, Byte[] image) {
+        Date currDate = new Date();
+        WeatherEventID eventID = new WeatherEventID(currDate, uid);
+        WeatherEvent event = weatherEventRepository.get(eventID);
+        event.updatePicture(image,description, uid);
+        weatherEventRepository.update(event);
     }
 }
