@@ -1,7 +1,7 @@
 package weatherEvent.domain;
 
-import account.domain.User;
-
 public interface WeatherEventRepository {
-    void store(WeatherEvent weatherEvent);
+    WeatherEvent get(WeatherEventID id);
+    boolean update(WeatherEvent updateEvent);
+    boolean store(WeatherEvent event);
 }

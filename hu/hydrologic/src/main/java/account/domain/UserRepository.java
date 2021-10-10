@@ -1,6 +1,7 @@
-package account.domain;
+package hydrologic.src.main.java.account.domain;
 
 public interface UserRepository {
-    void store(User user);
-    User getUser(String id);
+    boolean store(User user);
+    boolean update(User user);
+    User get(UserID id);
 }

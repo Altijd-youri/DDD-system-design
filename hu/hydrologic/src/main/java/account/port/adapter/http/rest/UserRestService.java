@@ -1,18 +1,16 @@
 package account.port.adapter.http.rest;
 
 import account.application.UserApplicationService;
-import account.domain.User;
-import account.domain.UserRepository;
-import account.port.adapter.persistence.FileUserRepository;
 
 public class UserRestService {
     UserApplicationService userApplicationService = new UserApplicationService();
 
+    public void userAddSavedLocation(String latitude, String longitude, String name, String userID) {
+        userApplicationService.userAddSavedLocation(latitude,longitude,name,userID);
+    }
+
     public void addUserToCompany(String userID, String companyID) {
         userApplicationService.addUserToCompany(userID, companyID);
     }
-
-    public User getUserOfID(String userID){
-       return userApplicationService.getUser(userID);
-    }
 }
+

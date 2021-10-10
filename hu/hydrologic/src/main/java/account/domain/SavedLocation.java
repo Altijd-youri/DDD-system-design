@@ -5,11 +5,13 @@ public class SavedLocation {
     private SavedLocationID savedLocationID;
     private Coordinates coordinates;
 
-    public SavedLocation(String name, SavedLocationID savedLocationID, Coordinates coordinates) {
+    public SavedLocation(String name, String langitude, String longitude) {
         this.name = name;
-        this.savedLocationID = savedLocationID;
-        this.coordinates = coordinates;
+        this.savedLocationID = new SavedLocationID("id");
+        this.coordinates = new Coordinates( Double.parseDouble(longitude), Double.parseDouble(langitude));
+    }
 
-
+    public SavedLocationID getID() {
+        return this.savedLocationID;
     }
 }
