@@ -1,11 +1,12 @@
 package weatherEvent.domain;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MeasurementStation {
     private UserID owner;
     private MeasurementStationIdentity id;
-    private Set<WeatherEventIdentity> events;
+    private List<WeatherEventID> events;
     private Location location;
     private String name;
 
@@ -14,9 +15,10 @@ public class MeasurementStation {
         this.id = id;
         this.location = location;
         this.name = name;
+        this.events = new ArrayList<WeatherEventID>();
     }
 
-    public void addWeatherEvent(WeatherEventIdentity event) {
+    public void addWeatherEvent(WeatherEventID event) {
         events.add(event);
     }
 

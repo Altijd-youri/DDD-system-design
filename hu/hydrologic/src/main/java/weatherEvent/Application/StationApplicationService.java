@@ -16,7 +16,7 @@ public class StationApplicationService {
 
         Location location = mStation.getLocation();
 
-        WeatherEventIdentity wEventId = eventApplication.newWeatherEvent(Uid, location.getLongitude(), location.getLatitude(), parseMeasurements(measurements));
+        WeatherEventID wEventId = eventApplication.newWeatherEvent(Uid, location.getLongitude(), location.getLatitude(), parseMeasurements(measurements));
 
         mStation.addWeatherEvent(wEventId);
 

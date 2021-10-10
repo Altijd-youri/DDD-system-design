@@ -6,4 +6,9 @@ public class CompanyID {
     public CompanyID(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return id ;
+    }
 }

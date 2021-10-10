@@ -1,15 +1,19 @@
 package weatherEvent.Application;
 
-import weatherEvent.domain.Measurement;
-import weatherEvent.domain.UserID;
-import weatherEvent.domain.WeatherEventIdentity;
+import weatherEvent.domain.*;
+import weatherEvent.port.adapter.persistence.MemoryWeatherEventRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public class WeatherEventApplicationService {
+    WeatherEventRepository weatherEventRepository = new MemoryWeatherEventRepository();
 
-    public WeatherEventIdentity newWeatherEvent(UserID Uid, double longitude, double latitude, List<Measurement> measurements) {
-        // Should be implemented by Milan, StationApplicationService (by Youri) depends on this implementation.
-        return new WeatherEventIdentity("mocekd id, while not implemented");
+    public WeatherEventID newWeatherEvent(UserID Uid, double longitude, double latitude, List<Measurement> measurements) {
+        Date currDate = new Date();
+        WeatherEventID eventID = new WeatherEventID(currDate, Uid);
+        WeatherEvent event = new WeatherEvent(eventID, Uid, measurements, new Location(longitude, latitude), currDate);
+        weatherEventRepository.store(event);
+        return event.getId();
     }
 }
