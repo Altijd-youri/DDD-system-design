@@ -7,10 +7,10 @@ import weatherEvent.domain.MeasurementStationRepository;
 
 import java.util.Date;
 
-public class StationApplicationService {
+public class MeasurementStationApplicationService {
     private MeasurementStationRepository repository;
 
-    public StationApplicationService(MeasurementStationRepository repository) {
+    public MeasurementStationApplicationService(MeasurementStationRepository repository) {
         this.repository = repository;
     }
 

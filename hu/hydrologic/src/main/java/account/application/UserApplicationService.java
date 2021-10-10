@@ -14,7 +14,7 @@ public class UserApplicationService {
   
     public void addUserToCompany(String userID, String companyID) {
           User user = userRepository.getUser(userID);
-          user.setCompany(companyID);
+//          user.setCompany(companyID);
           userRepository.store(user);
       }
 }
