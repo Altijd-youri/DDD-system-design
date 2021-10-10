@@ -16,11 +16,15 @@ public class MeasurementStation {
         this.name = name;
     }
 
-    public void AddEvent(WeatherEventIdentity event) {
+    public void addWeatherEvent(WeatherEventIdentity event) {
         events.add(event);
     }
 
     public MeasurementStationIdentity getIdentity() {
         return id;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 }
