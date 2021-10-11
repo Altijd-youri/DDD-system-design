@@ -1,7 +1,8 @@
 package weatherEvent.domain;
 
 public interface MeasurementStationRepository {
-    MeasurementStation stationOfUserById(UserID Uid, String mStationId);
-
-    String store(MeasurementStation mstation);
+    MeasurementStationIdentity nextIdentity();
+    MeasurementStation stationOfUserById(UserID Uid, String mStationId) throws Exception;
+    boolean store(MeasurementStation mstation) throws Exception;
+    boolean delete(String mStationId);
 }

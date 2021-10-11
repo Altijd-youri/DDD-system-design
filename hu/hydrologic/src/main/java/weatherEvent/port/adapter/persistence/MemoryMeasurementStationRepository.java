@@ -2,23 +2,42 @@ package weatherEvent.port.adapter.persistence;
 
 import weatherEvent.domain.*;
 
-public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
-    @Override
-    public MeasurementStation stationOfUserById(UserID Uid, String mStationId) {
-        //Mock
-        Location mockedLocation = new Location(52.087278, 5.178389);
-        String mockedName = "Utrecht Science park";
-        //End Mock
+import java.util.HashMap;
+import java.util.Map;
 
-        return new MeasurementStation(Uid, new MeasurementStationIdentity("mStationId"), mockedLocation, mockedName);
+public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
+    static Map<MeasurementStationIdentity, MeasurementStation> savedStations = new HashMap();
+    private static long id = 0;
+
+    @Override
+    public MeasurementStationIdentity nextIdentity() {
+        id++;
+        return new MeasurementStationIdentity(String.valueOf(id));
     }
 
     @Override
-    public String store(MeasurementStation mstation) {
-        //Mock
-        String mockedmStationId = mstation.getIdentity().toString();
-        //End Mock
+    public MeasurementStation stationOfUserById(UserID Uid, String mStationId) throws Exception {
+        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
 
-        return mockedmStationId;
+        MeasurementStation found = savedStations.get(toFind);
+        if (found != null) {
+            if (!found.isOwnedBy(Uid)) throw new Exception("This station is not owned by this user.");
+            return found;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean store(MeasurementStation mStation) {
+        MeasurementStation previous = savedStations.put(mStation.getIdentity(), mStation);
+        return previous != null;
+    }
+
+    @Override
+    public boolean delete(String mStationId) {
+        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
+
+        MeasurementStation previous = savedStations.remove(toFind);
+        return previous != null;
     }
 }

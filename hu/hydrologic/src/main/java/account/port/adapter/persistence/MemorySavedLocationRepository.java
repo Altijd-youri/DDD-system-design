@@ -7,10 +7,16 @@ import java.util.List;
 
 public class MemorySavedLocationRepository implements SavedLocationRepository {
     private static final List<SavedLocation> savedLocations = new ArrayList<>();
+    private static long id = 0;
 
     @Override
     public boolean store(SavedLocation savedLocation) {
-        savedLocations.add(savedLocation);
+        for (int i = 0; i < savedLocations.size(); i++){
+            if (savedLocations.get(i).getID().equals(savedLocation.getID())){
+                savedLocations.add(savedLocation);
+                return true;
+            }
+        }
         return true;
     }
 
@@ -24,6 +30,13 @@ public class MemorySavedLocationRepository implements SavedLocationRepository {
         }
         return false;
     }
+
+    @Override
+    public SavedLocationID nextIdentity() {
+        id++;
+        return new SavedLocationID(String.valueOf(id));
+    }
+
 
     @Override
     public SavedLocation get(SavedLocationID id) {

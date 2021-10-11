@@ -25,8 +25,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void createSavedLocation(String latitude, String longitude, String name){
-        this.savedLocationRepository.store(new SavedLocation(name,latitude,longitude));
+    public SavedLocation createSavedLocation(SavedLocationID savedLocationID, Coordinates coordinates, String name){
+        if (this.savedLocationRepository.get(savedLocationID) == null){
+            return new SavedLocation(name, savedLocationID, coordinates);
+        }
+        return null;
     }
 
     public void setCompany(CompanyID companyID) {
