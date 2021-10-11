@@ -19,4 +19,8 @@ public class WeatherEventRESTService {
         }
         return weatherEventApplicationService.newWeatherEvent(new UserID(Uid), Double.parseDouble(longitude), Double.parseDouble(latitude), parsedMeasurements);
     }
+
+    public WeatherEventID newWeatherEvent(String Uid, String longitude, String latitude) {
+        return newWeatherEvent(Uid, longitude, latitude);
+    }
 }
