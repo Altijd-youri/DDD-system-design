@@ -1,9 +1,6 @@
 package weatherEvent.Application;
 
-import weatherEvent.domain.Location;
-import weatherEvent.domain.MeasurementStation;
-import weatherEvent.domain.MeasurementStationIdentity;
-import weatherEvent.domain.MeasurementStationRepository;
+import weatherEvent.domain.*;
 
 import java.util.Date;
 
@@ -18,7 +15,7 @@ public class MeasurementStationApplicationService {
         MeasurementStationIdentity stationId = this.repository.nextIdentity();
 
 
-        MeasurementStation measurementStation = new MeasurementStation(stationId, lastCalibratedAt, new Location(latitude, longitude), name);
+        MeasurementStation measurementStation = new MeasurementStation(new UserID(userId), stationId, lastCalibratedAt, new Location(latitude, longitude), name);
 
         return this.repository.store(measurementStation);
     }

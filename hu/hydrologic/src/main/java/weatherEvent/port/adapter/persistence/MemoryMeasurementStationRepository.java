@@ -17,13 +17,13 @@ public class MemoryMeasurementStationRepository implements MeasurementStationRep
     }
 
     @Override
-    public MeasurementStation stationOfUserById(UserID Uid, final String mStationId) throws Exception{
+    public MeasurementStation stationOfUserById(final UserID Uid, final String mStationId){
         //Mock
         Location mockedLocation = new Location(52.087278, 5.178389);
         String mockedName = "Utrecht Science park";
         //End Mock
-//        return stations.stream().filter((MeasurementStation station) -> station.
-        return new MeasurementStation(Uid, new MeasurementStationIdentity("mStationId"), mockedLocation, mockedName);
+        return stations.stream().filter((station) -> station.isOfOwner(Uid)).findFirst().orElseThrow(RuntimeException::new);
+//        return new MeasurementStation(Uid, new MeasurementStationIdentity("mStationId"), mockedLocation, mockedName);
     }
 
     @Override

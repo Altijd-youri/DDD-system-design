@@ -12,5 +12,9 @@ public class UserRestService {
     public void addUserToCompany(String userID, String companyID) {
         userApplicationService.addUserToCompany(userID, companyID);
     }
+
+    public boolean userExists(String id) {
+        return this.userApplicationService.userExists(id);
+    }
 }
 

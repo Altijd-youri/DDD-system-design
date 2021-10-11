@@ -1,6 +1,7 @@
 package account.application;
 
 import account.domain.*;
+import account.port.adapter.persistence.MemoryCompanyRepository;
 import account.port.adapter.persistence.MemoryUserRepository;
 
 public class UserApplicationService {
@@ -22,4 +23,8 @@ public class UserApplicationService {
               userRepository.update(user);
           }
       }
+
+    public boolean userExists(String id) {
+        return this.userRepository.get(new UserID(id)) != null;
+    }
 }

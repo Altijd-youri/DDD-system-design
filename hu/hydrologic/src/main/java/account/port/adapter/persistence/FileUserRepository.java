@@ -1,16 +1,24 @@
 package account.port.adapter.persistence;
 
 import account.domain.User;
+import account.domain.UserID;
 import account.domain.UserRepository;
 
 public class FileUserRepository implements UserRepository {
-    public void store(User user) {
+    public boolean store(User user) {
 
+        return false;
     }
 
     @Override
-    public void update(User user) {
+    public boolean update(User user) {
 
+        return false;
+    }
+
+    @Override
+    public User get(UserID id) {
+        return null;
     }
 
     public User getUser(String id) {
