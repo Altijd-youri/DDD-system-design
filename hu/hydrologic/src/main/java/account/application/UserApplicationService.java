@@ -14,9 +14,6 @@ public class UserApplicationService {
         User user = userRepository.get(new UserID(userID));
 
         if (user != null){
-            if (){
-
-            }
             SavedLocationID savedLocationID = this.savedLocationRepository.nextIdentity();
             Coordinates coordinates = new Coordinates( Double.parseDouble(longitude), Double.parseDouble(latitude));
             SavedLocation savedLocation = user.createSavedLocation(savedLocationID, coordinates ,name);
