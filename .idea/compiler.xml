@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ddd-design" />
         <module name="DDD-system-design" />
+        <module name="ddd-design" />
       </profile>
     </annotationProcessing>
   </component>

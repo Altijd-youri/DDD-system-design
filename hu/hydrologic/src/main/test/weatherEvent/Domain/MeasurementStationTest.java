@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MeasurementStationTest {
     @Test
     public void createMeasurementStation() {
+
+
         assertDoesNotThrow(() -> new MeasurementStation(
                 new UserID("1"),
                 new MeasurementStationIdentity(String.valueOf(1)),

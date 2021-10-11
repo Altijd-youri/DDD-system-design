@@ -5,7 +5,6 @@ import weatherEvent.port.adapter.services.CollaborationService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 public class MeasurementStation {
     private UserID owner;
@@ -55,7 +54,7 @@ public class MeasurementStation {
         return location;
     }
 
-    public boolean isOfOwner(UserID uid) {
-        return this.owner.equals(uid);
+    public boolean isOwnedBy(UserID userID) {
+        return owner == userID;
     }
 }

@@ -2,12 +2,11 @@ package weatherEvent.port.adapter.persistence;
 
 import weatherEvent.domain.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-// Mocked implementation
 public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
-    private static final Set<MeasurementStation> stations = new HashSet<>();
+    static Map<MeasurementStationIdentity, MeasurementStation> savedStations = new HashMap();
     private static long id = 0;
 
     @Override
@@ -17,18 +16,28 @@ public class MemoryMeasurementStationRepository implements MeasurementStationRep
     }
 
     @Override
-    public MeasurementStation stationOfUserById(final UserID Uid, final String mStationId){
-        //Mock
-        Location mockedLocation = new Location(52.087278, 5.178389);
-        String mockedName = "Utrecht Science park";
-        //End Mock
-        return stations.stream().filter((station) -> station.isOfOwner(Uid)).findFirst().orElseThrow(RuntimeException::new);
-//        return new MeasurementStation(Uid, new MeasurementStationIdentity("mStationId"), mockedLocation, mockedName);
+    public MeasurementStation stationOfUserById(UserID Uid, String mStationId) throws Exception {
+        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
+
+        MeasurementStation found = savedStations.get(toFind);
+        if (found != null) {
+            if (!found.isOwnedBy(Uid)) throw new Exception("This station is not owned by this user.");
+            return found;
+        }
+        return null;
     }
 
     @Override
-    public boolean store(MeasurementStation station) {
-        return stations.add(station);
+    public boolean store(MeasurementStation mStation) {
+        MeasurementStation previous = savedStations.put(mStation.getIdentity(), mStation);
+        return previous != null;
     }
-    //TODO - Youri: Implement mock
+
+    @Override
+    public boolean delete(String mStationId) {
+        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
+
+        MeasurementStation previous = savedStations.remove(toFind);
+        return previous != null;
+    }
 }
