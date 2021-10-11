@@ -2,32 +2,42 @@ package weatherEvent.port.adapter.persistence;
 
 import weatherEvent.domain.*;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
-    static List<MeasurementStation> savedStations;
+    static Map<MeasurementStationIdentity, MeasurementStation> savedStations = new HashMap();
+    private static long id = 0;
+
+    @Override
+    public MeasurementStationIdentity nextIdentity() {
+        id++;
+        return new MeasurementStationIdentity(String.valueOf(id));
+    }
 
     @Override
     public MeasurementStation stationOfUserById(UserID Uid, String mStationId) throws Exception {
+        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
 
-        for (MeasurementStation savedStation : savedStations) {
-            if (savedStation.getIdentity().toString() == mStationId) {
-                if (!savedStation.isOwnedBy(Uid)) throw new Exception("This station is not owned by this user.");
-                return savedStation;
-            }
+        MeasurementStation found = savedStations.get(toFind);
+        if (found != null) {
+            if (!found.isOwnedBy(Uid)) throw new Exception("This station is not owned by this user.");
+            return found;
         }
         return null;
     }
 
     @Override
-    public MeasurementStationIdentity store(MeasurementStation mStation) {
-        MeasurementStationIdentity mStationId = mStation.getIdentity();
+    public boolean store(MeasurementStation mStation) {
+        MeasurementStation previous = savedStations.put(mStation.getIdentity(), mStation);
+        return previous != null;
+    }
 
-        for (MeasurementStation savedStation : savedStations) {
-            if (savedStation.getIdentity() == mStationId) {
-                return mStationId;
-            }
-        }
-        return null;
+    @Override
+    public boolean delete(String mStationId) {
+        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
+
+        MeasurementStation previous = savedStations.remove(toFind);
+        return previous != null;
     }
 }
