@@ -26,7 +26,10 @@ public class User {
     }
 
     public SavedLocation createSavedLocation(SavedLocationID savedLocationID, Coordinates coordinates, String name){
-        SavedLocation savedLocation = new SavedLocation(name,savedLocationID,coordinates);
+        if (this.savedLocationRepository.get(savedLocationID) == null){
+            return new SavedLocation(name, savedLocationID, coordinates);
+        }
+        return null;
     }
 
     public void setCompany(CompanyID companyID) {

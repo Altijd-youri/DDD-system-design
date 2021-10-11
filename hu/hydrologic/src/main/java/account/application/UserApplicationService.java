@@ -12,11 +12,19 @@ public class UserApplicationService {
 
     public void userAddSavedLocation(String latitude, String longitude, String name, String userID) {
         User user = userRepository.get(new UserID(userID));
-        SavedLocationID savedLocationID = this.savedLocationRepository.nextIdentity();
-        Coordinates coordinates = new Coordinates( Double.parseDouble(longitude), Double.parseDouble(latitude));
-        SavedLocation savedLocation = user.createSavedLocation(savedLocationID, coordinates ,name);
-        userRepository.update(user);
-        this.savedLocationRepository.store(savedLocation);
+
+        if (user != null){
+            if (){
+
+            }
+            SavedLocationID savedLocationID = this.savedLocationRepository.nextIdentity();
+            Coordinates coordinates = new Coordinates( Double.parseDouble(longitude), Double.parseDouble(latitude));
+            SavedLocation savedLocation = user.createSavedLocation(savedLocationID, coordinates ,name);
+            userRepository.update(user);
+            this.savedLocationRepository.store(savedLocation);
+        }
+
+
     }
   
     public void addUserToCompany(String userID, String companyID) {
