@@ -4,6 +4,7 @@ import weatherEvent.domain.*;
 import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class StationApplicationService {
@@ -29,6 +30,14 @@ public class StationApplicationService {
             parsedMeasurements.add(new Measurement(new MeasurementUnit(measurement.get(1)), Double.parseDouble(measurement.get(0))));
         }
         return parsedMeasurements;
+    }
+
+    public boolean createMeasurementStation(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {
+        MeasurementStationIdentity stationId = this.repository.nextIdentity();
+
+        MeasurementStation measurementStation = new MeasurementStation(new UserID(userId), stationId, lastCalibratedAt, new Location(latitude, longitude), name);
+
+        return this.repository.store(measurementStation);
     }
 
 }
