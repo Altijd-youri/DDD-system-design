@@ -33,4 +33,8 @@ public class UserApplicationService {
               userRepository.update(user);
           }
       }
+
+    public boolean userExists(String id) {
+        return this.userRepository.get(new UserID(id)) != null;
+    }
 }
