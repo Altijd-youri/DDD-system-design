@@ -1,8 +1,6 @@
 package weatherEvent.port.adapter.persistence;
 
-import weatherEvent.domain.MeasurementStation;
-import weatherEvent.domain.MeasurementStationIdentity;
-import weatherEvent.domain.MeasurementStationRepository;
+import weatherEvent.domain.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +14,16 @@ public class MemoryMeasurementStationRepository implements MeasurementStationRep
     public MeasurementStationIdentity nextIdentity() {
         id++;
         return new MeasurementStationIdentity(String.valueOf(id));
+    }
+
+    @Override
+    public MeasurementStation stationOfUserById(UserID Uid, final String mStationId) throws Exception{
+        //Mock
+        Location mockedLocation = new Location(52.087278, 5.178389);
+        String mockedName = "Utrecht Science park";
+        //End Mock
+//        return stations.stream().filter((MeasurementStation station) -> station.
+        return new MeasurementStation(Uid, new MeasurementStationIdentity("mStationId"), mockedLocation, mockedName);
     }
 
     @Override

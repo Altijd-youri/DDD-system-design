@@ -1,20 +1,25 @@
 package account.application;
 
-import account.domain.User;
-import account.domain.UserRepository;
+import account.domain.*;
+import account.port.adapter.persistence.MemoryUserRepository;
 
 public class UserApplicationService {
-    UserRepository userRepository;
+    private final UserRepository userRepository = new MemoryUserRepository();
+    private final CompanyRepository companyRepository = new MemoryCompanyRepository();
 
-    public void userAddSavedLocation(String langitude, String longitude, String name, String userID) {
-        User user = userRepository.getUser(userID);
-        user.createSavedLocation(langitude,longitude,name);
+    public void userAddSavedLocation(String latitude, String longitude, String name, String userID) {
+        User user = userRepository.get(new UserID(userID));
+        user.createSavedLocation(latitude,longitude,name);
         userRepository.update(user);
     }
   
     public void addUserToCompany(String userID, String companyID) {
-          User user = userRepository.getUser(userID);
-//          user.setCompany(companyID);
-          userRepository.store(user);
+          User user = userRepository.get(new UserID(userID));
+          Company company = companyRepository.get(new CompanyID(companyID));
+
+          if(user != null && company != null) {
+              user.setCompany(new CompanyID(companyID));
+              userRepository.update(user);
+          }
       }
 }

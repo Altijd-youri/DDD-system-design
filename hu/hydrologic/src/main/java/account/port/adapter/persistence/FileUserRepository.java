@@ -5,7 +5,7 @@ import account.domain.UserRepository;
 
 public class FileUserRepository implements UserRepository {
     public void store(User user) {
-        
+
     }
 
     @Override

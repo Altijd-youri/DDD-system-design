@@ -9,7 +9,9 @@ public class SavedLocation {
         this.name = name;
         this.savedLocationID = new SavedLocationID("id");
         this.coordinates = new Coordinates( Double.parseDouble(longitude), Double.parseDouble(langitude));
+    }
 
-
+    public SavedLocationID getID() {
+        return this.savedLocationID;
     }
 }

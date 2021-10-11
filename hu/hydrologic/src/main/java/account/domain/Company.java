@@ -12,4 +12,8 @@ public class Company{
         this.sector = sector;
         this.address = address;
     }
+
+    public CompanyID getID() {
+        return this.companyID;
+    }
 }

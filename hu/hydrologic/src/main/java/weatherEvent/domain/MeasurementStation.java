@@ -1,10 +1,14 @@
 package weatherEvent.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public class MeasurementStation {
+    private UserID owner;
     private MeasurementStationIdentity id;
+    private List<WeatherEventID> events;
     private Date lastCalibratedAt;
     private Location location;
     private String name;
@@ -17,7 +21,7 @@ public class MeasurementStation {
      * @param name
      * @throws Exception - Throws exception if lastCalibratedAt is longer than 1 year ago.
      */
-    public MeasurementStation(MeasurementStationIdentity id, Date lastCalibratedAt, Location location, String name) throws Exception{
+    public MeasurementStation(UserID owner, MeasurementStationIdentity id, Date lastCalibratedAt, Location location, String name) throws Exception{
         Date currentDate = new Date();
         final long millisecondsInAYear = 31557600000L;
 
@@ -25,8 +29,25 @@ public class MeasurementStation {
             throw new Exception("Last calibration time can't be longer than 1 year ago");
         }
 
+        //Check if user exists
+
         this.id = id;
+        this.owner = owner;
         this.location = location;
         this.name = name;
+        this.lastCalibratedAt = lastCalibratedAt;
+        this.events = new ArrayList<WeatherEventID>();
+    }
+
+    public void addWeatherEvent(WeatherEventID event) {
+        events.add(event);
+    }
+
+    public MeasurementStationIdentity getIdentity() {
+        return id;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 }

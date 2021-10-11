@@ -10,14 +10,10 @@ public class WeatherEvent {
     private Date timeStamp;
     private UserID reportedBy;
 
-    public WeatherEvent(UserID reporter) {
-        this.reportedBy = reporter;
-    }
-
-    public WeatherEvent(UserID reporter, List<Measurement> measurements, Location location, WeatherEventID id, Date timeStamp) {
+    public WeatherEvent(WeatherEventID id, UserID reporter, List<Measurement> measurements, Location location, Date timeStamp) {
+        this.id = id;
         this.measurements = measurements;
         this.location = location;
-        this.id = id;
         this.timeStamp = timeStamp;
         this.reportedBy = reporter;
     }
