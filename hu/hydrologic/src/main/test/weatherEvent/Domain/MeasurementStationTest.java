@@ -1,4 +1,4 @@
-package WeatherEvent.Domain;
+package weatherEvent.Domain;
 
 import org.junit.jupiter.api.Test;
 import weatherEvent.domain.Location;

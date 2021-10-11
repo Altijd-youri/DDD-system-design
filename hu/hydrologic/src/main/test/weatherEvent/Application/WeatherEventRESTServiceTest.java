@@ -1,4 +1,4 @@
-package WeatherEvent.Application;
+package weatherEvent.Application;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
