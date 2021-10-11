@@ -17,11 +17,15 @@ public class WeatherEventApplicationService {
         return event.getId();
     }
 
-    public void updatePicture(UserID uid, String description, String weathereventID, Byte[] image) {
-        Date currDate = new Date();
-        WeatherEventID eventID = new WeatherEventID(currDate, uid);
-        WeatherEvent event = weatherEventRepository.get(eventID);
-        event.updatePicture(image,description, uid);
-        weatherEventRepository.update(event);
+
+    public void addPicture(String uid, String description, Byte[] image, WeatherEventID weatherEventID) {
+        CollaborationService collaborationService = new CollaborationService();
+        if (collaborationService.userExists(uid)){
+            if (weatherEventRepository.get(weatherEventID)!=null) {
+                WeatherEvent event = weatherEventRepository.get(weatherEventID);
+                event.addPicture(image, description);
+                weatherEventRepository.update(event);
+            }
+        }
     }
 }

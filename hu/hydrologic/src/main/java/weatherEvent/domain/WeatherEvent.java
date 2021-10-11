@@ -9,6 +9,7 @@ public class WeatherEvent {
     private Location location;
     private Date timeStamp;
     private UserID reportedBy;
+    private Picture picture;
 
     public WeatherEvent(WeatherEventID id, UserID reporter, List<Measurement> measurements, Location location, Date timeStamp) {
         this.id = id;
@@ -16,13 +17,14 @@ public class WeatherEvent {
         this.location = location;
         this.timeStamp = timeStamp;
         this.reportedBy = reporter;
+        this.picture = null;
     }
 
     public WeatherEventID getId() {
         return this.id;
     }
 
-    public void updatePicture(Byte[] image, String description, UserID userID){
-        Picture picture = new Picture(image,description);
+    public void addPicture(Byte[] image, String description){
+        picture = new Picture(image,description);
     }
 }

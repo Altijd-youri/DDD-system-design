@@ -20,7 +20,7 @@ public class WeatherEventRESTService {
         return weatherEventApplicationService.newWeatherEvent(new UserID(Uid), Double.parseDouble(longitude), Double.parseDouble(latitude), parsedMeasurements);
     }
 
-    public void updatePicture(String uid, String description, String weathereventID, Byte[] image){
-        weatherEventApplicationService.updatePicture(new UserID(uid), description, weathereventID, image);
+    public void addPicture(String uid, String description, Byte[] image, WeatherEventID weatherEventID){
+        weatherEventApplicationService.addPicture(uid, description, image, weatherEventID);
     }
 }
