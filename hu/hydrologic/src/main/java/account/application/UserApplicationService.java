@@ -1,6 +1,7 @@
 package account.application;
 
 import account.domain.*;
+import account.port.adapter.persistence.MemoryCompanyRepository;
 import account.port.adapter.persistence.MemoryUserRepository;
 
 public class UserApplicationService {

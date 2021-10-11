@@ -10,7 +10,7 @@ public class StationApplicationService {
     MeasurementStationRepository repository = new MemoryMeasurementStationRepository();
     WeatherEventApplicationService eventApplication = new WeatherEventApplicationService();
 
-    public void weatherEventOnStation(String UidInput, String mStationId, List<List<String>> measurements) {
+    public void weatherEventOnStation(String UidInput, String mStationId, List<List<String>> measurements) throws Exception {
         UserID Uid = new UserID(UidInput);
         MeasurementStation mStation = repository.stationOfUserById(Uid, mStationId);
 

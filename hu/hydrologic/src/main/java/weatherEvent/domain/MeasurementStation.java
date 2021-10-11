@@ -29,4 +29,8 @@ public class MeasurementStation {
     public Location getLocation() {
         return location;
     }
+
+    public boolean isOwnedBy(UserID userID) {
+        return owner == userID;
+    }
 }

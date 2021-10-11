@@ -2,23 +2,32 @@ package weatherEvent.port.adapter.persistence;
 
 import weatherEvent.domain.*;
 
-public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
-    @Override
-    public MeasurementStation stationOfUserById(UserID Uid, String mStationId) {
-        //Mock
-        Location mockedLocation = new Location(52.087278, 5.178389);
-        String mockedName = "Utrecht Science park";
-        //End Mock
+import java.util.List;
 
-        return new MeasurementStation(Uid, new MeasurementStationIdentity("mStationId"), mockedLocation, mockedName);
+public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
+    static List<MeasurementStation> savedStations;
+
+    @Override
+    public MeasurementStation stationOfUserById(UserID Uid, String mStationId) throws Exception {
+
+        for (MeasurementStation savedStation : savedStations) {
+            if (savedStation.getIdentity().toString() == mStationId) {
+                if (!savedStation.isOwnedBy(Uid)) throw new Exception("This station is not owned by this user.");
+                return savedStation;
+            }
+        }
+        return null;
     }
 
     @Override
-    public String store(MeasurementStation mstation) {
-        //Mock
-        String mockedmStationId = mstation.getIdentity().toString();
-        //End Mock
+    public MeasurementStationIdentity store(MeasurementStation mStation) {
+        MeasurementStationIdentity mStationId = mStation.getIdentity();
 
-        return mockedmStationId;
+        for (MeasurementStation savedStation : savedStations) {
+            if (savedStation.getIdentity() == mStationId) {
+                return mStationId;
+            }
+        }
+        return null;
     }
 }
