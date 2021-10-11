@@ -2,6 +2,7 @@ package weatherEvent.application;
 
 import weatherEvent.domain.*;
 import weatherEvent.port.adapter.persistence.MemoryWeatherEventRepository;
+import weatherEvent.port.adapter.services.CollaborationService;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ public class WeatherEventApplicationService {
 
     public void addPicture(String uid, String description, Byte[] image, WeatherEventID weatherEventID) {
         CollaborationService collaborationService = new CollaborationService();
-        if (collaborationService.userExists(uid)){
+        if (collaborationService.userExists(new UserID(uid))){
             if (weatherEventRepository.get(weatherEventID)!=null) {
                 WeatherEvent event = weatherEventRepository.get(weatherEventID);
                 event.addPicture(image, description);
