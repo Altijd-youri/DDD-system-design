@@ -33,13 +33,24 @@ class WeatherEventRESTServiceTest {
     }
 
     @Test
-    void addPictureNoWeatherEventId(){
+    void addPictureWeatherEventIsNull(){
         assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", null, new WeatherEventID(null, null)));
+    }
+
+    @Test
+    void addPictureWeatherEventDoesNotExist(){
+        final Date currDate = new Date();
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", null, new WeatherEventID(currDate, new UserID("2"))));
     }
 
     @Test
     void addPictureUserDoesNotExist(){
         assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("2", "hallo", null, weatherEventID));
+    }
+
+    @Test
+    void addPictureUserisNull(){
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture(null, "hallo", null, weatherEventID));
     }
 
     @Test
