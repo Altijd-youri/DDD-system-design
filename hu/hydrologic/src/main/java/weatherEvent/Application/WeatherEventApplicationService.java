@@ -1,10 +1,9 @@
 package weatherEvent.Application;
 
 import weatherEvent.domain.*;
+import weatherEvent.domain.services.CollaborationService;
 import weatherEvent.port.adapter.persistence.MemoryWeatherEventRepository;
-import weatherEvent.port.adapter.services.CollaborationService;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
