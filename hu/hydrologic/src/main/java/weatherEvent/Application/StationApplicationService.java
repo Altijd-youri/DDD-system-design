@@ -17,19 +17,11 @@ public class StationApplicationService {
 
         Location location = mStation.getLocation();
 
-        WeatherEventID wEventId = eventApplication.newWeatherEvent(Uid, location.getLongitude(), location.getLatitude(), parseMeasurements(measurements));
+        WeatherEventID wEventId = eventApplication.newWeatherEvent(UidInput, location.getLongitude(), location.getLatitude(), measurements);
 
         mStation.addWeatherEvent(wEventId);
 
         repository.store(mStation);
-    }
-
-    private List<Measurement> parseMeasurements(List<List<String>> measurements) {
-        List<Measurement> parsedMeasurements = new ArrayList<>();
-        for (List<String> measurement : measurements) {
-            parsedMeasurements.add(new Measurement(new MeasurementUnit(measurement.get(1)), Double.parseDouble(measurement.get(0))));
-        }
-        return parsedMeasurements;
     }
 
     public boolean createMeasurementStation(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {

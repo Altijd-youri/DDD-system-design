@@ -1,4 +1,4 @@
-package WeatherEvent.Domain;
+package weatherEvent.Domain;
 
 import org.junit.jupiter.api.Test;
 import weatherEvent.domain.Location;
@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MeasurementStationTest {
     @Test
     public void createMeasurementStation() {
-
-
         assertDoesNotThrow(() -> new MeasurementStation(
                 new UserID("1"),
                 new MeasurementStationIdentity(String.valueOf(1)),
@@ -36,6 +34,6 @@ public class MeasurementStationTest {
                 dateYearAgo,
                 new Location(52.029421, 5.201923),
                 "Measurement station 1"
-        ), "Last calibration time can't be longer than 1 year ago");
+        ), "Last calibration time can't be longer than 1 year ago.");
     }
 }

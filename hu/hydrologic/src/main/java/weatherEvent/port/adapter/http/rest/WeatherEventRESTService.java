@@ -13,14 +13,10 @@ public class WeatherEventRESTService {
     WeatherEventApplicationService weatherEventApplicationService = new WeatherEventApplicationService();
 
     public WeatherEventID newWeatherEvent(String Uid, String longitude, String latitude, List<List<String>> measurements) {
-        List<Measurement> parsedMeasurements = new ArrayList<>();
-        for (List<String> measurement : measurements) {
-            parsedMeasurements.add(new Measurement(new MeasurementUnit(measurement.get(1)), Double.parseDouble(measurement.get(0))));
-        }
-        return weatherEventApplicationService.newWeatherEvent(new UserID(Uid), Double.parseDouble(longitude), Double.parseDouble(latitude), parsedMeasurements);
+        return weatherEventApplicationService.newWeatherEvent(Uid, Double.parseDouble(longitude), Double.parseDouble(latitude), measurements);
     }
 
     public WeatherEventID newWeatherEvent(String Uid, String longitude, String latitude) {
-        return newWeatherEvent(Uid, longitude, latitude);
+        return newWeatherEvent(Uid, longitude, latitude, new ArrayList<>());
     }
 }
