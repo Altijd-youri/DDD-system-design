@@ -37,4 +37,15 @@ public class UserApplicationService {
     public boolean userExists(String id) {
         return this.userRepository.get(new UserID(id)) != null;
     }
+
+    public UserID makeUser(String companyId, String firstName, String lastName, String email) {
+        UserID userId = new UserID();
+        User newUser = new User(userId, new CompanyID(companyId), new Email(email), Role.USER, firstName, lastName);
+        if (userRepository.store(newUser)) {
+            return userId;
+        }
+        else {
+            return null;
+        }
+    }
 }

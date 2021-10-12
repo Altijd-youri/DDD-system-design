@@ -1,6 +1,7 @@
 package account.port.adapter.http.rest;
 
 import account.application.UserApplicationService;
+import account.domain.UserID;
 
 public class UserRestService {
     UserApplicationService userApplicationService = new UserApplicationService();
@@ -15,6 +16,10 @@ public class UserRestService {
 
     public boolean userExists(String id) {
         return this.userApplicationService.userExists(id);
+    }
+
+    public UserID makeUser(String companyId, String firstName, String lastName, String email) {
+        return userApplicationService.makeUser(companyId, firstName, lastName, email);
     }
 }
 
