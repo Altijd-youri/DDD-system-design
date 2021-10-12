@@ -27,7 +27,7 @@ public class MemoryUserRepository implements UserRepository {
     @Override
     public boolean update(User user) {
         for (User u : users) {
-            if (u.getID().toString().equals(user.getID().toString())) {
+            if (u.getID().equals(user.getID())) {
                 users.remove(user);
                 users.add(user);
                 return true;
@@ -39,7 +39,7 @@ public class MemoryUserRepository implements UserRepository {
     @Override
     public User get(UserID id) {
         for (User u : users){
-            if (u.getID().toString().equals(id.toString())){
+            if (u.getID().equals(id)){
                 return u;
             }
         }
