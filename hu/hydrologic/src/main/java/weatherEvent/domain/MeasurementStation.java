@@ -54,7 +54,7 @@ public class MeasurementStation {
         return location;
     }
 
-    public boolean isOfOwner(UserID uid) {
+    public boolean isOwnedBy(UserID uid) {
         return this.owner.equals(uid);
     }
 }

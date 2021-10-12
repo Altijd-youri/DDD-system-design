@@ -9,7 +9,7 @@ import java.util.List;
 public class StationRESTService {
     StationApplicationService applicationService = new StationApplicationService();
 
-    public void weatherEventOnStation(String Uid, String mStationId, List<List<String>> measurements) {
+    public void weatherEventOnStation(String Uid, String mStationId, List<List<String>> measurements) throws Exception {
         applicationService.weatherEventOnStation(Uid, mStationId, measurements);
     }
 
