@@ -3,10 +3,7 @@ package weatherEvent.port.adapter.http.rest;
 import account.domain.UserID;
 import account.domain.UserRepository;
 import account.port.adapter.http.rest.UserRestService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import weatherEvent.domain.WeatherEventID;
 
 import java.util.ArrayList;
@@ -14,13 +11,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WeatherEventRestServiceTest {
     static WeatherEventRESTService weatherService;
     static UserRestService userService;
 
     static UserID testUser;
 
-    @BeforeEach
+    @BeforeAll
     public void testInit() {
         this.weatherService = new WeatherEventRESTService();
         this.userService = new UserRestService();
