@@ -17,8 +17,8 @@ public class UserApplicationService {
             SavedLocationID savedLocationID = this.savedLocationRepository.nextIdentity();
             Coordinates coordinates = new Coordinates(Double.parseDouble(longitude), Double.parseDouble(latitude));
             SavedLocation savedLocation = user.createSavedLocation(savedLocationID, coordinates, name);
-            userRepository.update(user);
             this.savedLocationRepository.store(savedLocation);
+            userRepository.update(user);
         }else {
             throw new Exception("User doesn't exist");
         }
