@@ -10,12 +10,12 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public boolean store(User user) {
-        for (int i = 0; i < users.size(); i++){
-            if (users.get(i).getID().equals(user.getID())){
-                users.add(user);
-                return true;
+        for (User existUser : users) {
+            if (existUser.getID().equals(user.getID())) {
+                return false;
             }
         }
+        users.add(user);
         return true;
     }
 
