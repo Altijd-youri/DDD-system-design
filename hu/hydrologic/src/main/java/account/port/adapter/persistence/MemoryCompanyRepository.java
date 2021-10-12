@@ -10,8 +10,20 @@ public class MemoryCompanyRepository implements CompanyRepository {
 
     @Override
     public boolean store(Company company) {
-        for (int i = 0; i < companies.size(); i++){
-            if (companies.get(i).getID().equals(company.getID())){
+        for (Company c : companies) {
+            if (c.getID().toString().equals(company.getID().toString())) {
+                return false;
+            }
+        }
+        companies.add(company);
+        return true;
+    }
+
+    @Override
+    public boolean update(Company company) {
+        for (Company c : companies) {
+            if (c.getID().toString().equals(company.getID().toString())) {
+                companies.remove(company);
                 companies.add(company);
                 return true;
             }
@@ -20,21 +32,10 @@ public class MemoryCompanyRepository implements CompanyRepository {
     }
 
     @Override
-    public boolean update(Company company) {
-       for (int i = 0; i < companies.size(); i++){
-           if (companies.get(i).getID().equals(company.getID())){
-               companies.set(i, company);
-               return true;
-           }
-        }
-       return false;
-    }
-
-    @Override
     public Company get(CompanyID id) {
-        for (Company company : companies){
-            if (company.getID().equals(id)){
-                return company;
+        for (Company c : companies){
+            if (c.getID().toString().equals(id.toString())){
+                return c;
             }
         }
         return null;

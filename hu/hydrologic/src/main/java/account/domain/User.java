@@ -39,4 +39,8 @@ public class User {
     public UserID getID() {
         return this.userID;
     }
+
+    public CompanyID getCompany() {
+        return this.companyID;
+    }
 }
