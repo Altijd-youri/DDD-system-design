@@ -9,6 +9,11 @@ public class SavedLocationID {
 
     @Override
     public String toString() {
-        return id ;
+        return this.id ;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof SavedLocationID) && this.id.equals(obj.toString());
     }
 }

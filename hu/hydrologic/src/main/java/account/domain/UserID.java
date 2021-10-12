@@ -16,7 +16,12 @@ public class UserID {
 
     @Override
     public String toString() {
-        return id ;
+        return this.id ;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof UserID) && this.id.equals(obj.toString());
     }
 
     @Override

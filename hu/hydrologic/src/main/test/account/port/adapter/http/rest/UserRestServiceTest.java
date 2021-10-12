@@ -41,14 +41,14 @@ public class UserRestServiceTest {
     }
 
     @Test
-    public void addUserToCompany_isCompanyNotFound1() throws Exception {
+    public void addUserToCompany_isCompanyNotFound1() {
         userRepository.store(new User(new UserID("user123"), null, null, null, null, null));
 
         assertThrows(CompanyException.class, () -> userRestService.addUserToCompany("user123", "google"));
     }
 
     @Test
-    public void addUserToCompany_isCompanyNotFound2() throws Exception {
+    public void addUserToCompany_isCompanyNotFound2() {
         userRepository.store(new User(new UserID("user123"), null, null, null, null, null));
         companyRepository.store(new Company(new CompanyID("microsoft"), null, null, null));
 
