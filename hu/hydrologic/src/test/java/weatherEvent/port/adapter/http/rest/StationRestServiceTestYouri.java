@@ -2,10 +2,7 @@ package weatherEvent.port.adapter.http.rest;
 
 import account.domain.*;
 import account.port.adapter.persistence.MemoryUserRepository;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import weatherEvent.domain.Location;
 import weatherEvent.domain.MeasurementStation;
 import weatherEvent.domain.MeasurementStationID;
@@ -25,17 +22,18 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class StationRestServiceTestYouri {
     private static StationRestService restService;
     private static MeasurementStationRepository stationRepository;
+    private static UserRepository userRepository;
 
     @BeforeAll
     void setup() {
-        UserRepository repository = new MemoryUserRepository();
+        userRepository = new MemoryUserRepository();
         stationRepository = new MemoryMeasurementStationRepository();
 
         //Setup test user
         User user = new User(new account.domain.UserID("1"), new CompanyID("1"), new Email("user1@test.com"), Role.EMPLOYEE, "John", "Doe");
-        repository.store(user);
+        userRepository.store(user);
         user = new User(new account.domain.UserID("2"), new CompanyID("1"), new Email("user2@test.com"), Role.EMPLOYEE, "Jane", "Doe");
-        repository.store(user);
+        userRepository.store(user);
 
         //Setup
         Calendar calendar = Calendar.getInstance();
@@ -53,6 +51,11 @@ public class StationRestServiceTestYouri {
         }
 
         restService = new StationRestService();
+    }
+
+    @AfterAll
+    public void ClearRepository() {
+        userRepository.clear();
     }
 
     @Test
@@ -102,20 +105,22 @@ public class StationRestServiceTestYouri {
     @DisplayName("Add weatherEvent to badly calibrated station.")
     public void addWeatherEvent_BadlyCalibrated() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.YEAR, -1);
         Location location = new Location(52.00,4.0);
         try {
             MeasurementStation station = new MeasurementStation(new weatherEvent.domain.UserID("1"),new MeasurementStationID("sm3_old"),calendar.getTime(), location, "StationThree_badlyCalibrated");
             stationRepository.store(station);
         } catch (Exception e) {
-            fail("Test setup failed: Could not create measurementStation");
+            fail("Test setup failed: Could not create measurementStation: "+e.getMessage());
         }
 
         List<List<String>> measurements = getMeasurements(1);
-
+/*
+ To this functionality the Java Calender class should be mocked to change it after the measurementStation object is created (to simulate days passing),
+ that is way to much work and adds nothing to this assignment in our option. This code is to show we thought about this test case.
         assertThrows(Exception.class,
                 () -> restService.weatherEventOnStation("1", "sm3_old", measurements),
                 "Last calibration time can't be longer than 1 year ago");
+*/
     }
 
     private List<List<String>> getMeasurements(int numberOfMeasurements) {

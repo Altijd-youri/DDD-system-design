@@ -66,6 +66,7 @@ public class MeasurementStationTest {
     public void createMeasurementStationCalibrationToLangAgo() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.YEAR, -1);
+        calendar.add(Calendar.DATE, -1);
         assertThrows(Exception.class, () -> new MeasurementStation(
                 new UserID("1"),
                 new MeasurementStationID(String.valueOf(1)),
