@@ -1,19 +1,36 @@
 package weatherEvent.Application;
 
 import weatherEvent.domain.*;
+import weatherEvent.domain.services.CollaborationService;
 import weatherEvent.port.adapter.persistence.MemoryWeatherEventRepository;
 
 import java.util.Date;
 import java.util.List;
 
 public class WeatherEventApplicationService {
+    CollaborationService collabService = new CollaborationService();
     WeatherEventRepository weatherEventRepository = new MemoryWeatherEventRepository();
 
-    public WeatherEventID newWeatherEvent(UserID Uid, double longitude, double latitude, List<Measurement> measurements) {
+    public WeatherEventID newWeatherEvent(String Uid, double longitude, double latitude, List<List<String>> measurements) {
+        UserID userID = new UserID(Uid);
+        if (!collabService.userExists(userID))
+            throw new RuntimeException("Given user doesn't exist!");
+
         Date currDate = new Date();
-        WeatherEventID eventID = new WeatherEventID(currDate, Uid);
-        WeatherEvent event = new WeatherEvent(eventID, Uid, measurements, new Location(longitude, latitude), currDate);
-        weatherEventRepository.store(event);
+        WeatherEventID eventID = new WeatherEventID(currDate, userID);
+        WeatherEvent event = new WeatherEvent(eventID, userID, new Location(longitude, latitude), currDate);
+
+        for (List<String> measurement : measurements) {
+            Double value = Double.parseDouble(measurement.get(0));
+            MeasurementUnit unit = new MeasurementUnit(measurement.get(1));
+
+            Measurement newMeasurement = new Measurement(unit, value);
+            event.addMeasurement(newMeasurement);
+        }
+
+        if (!weatherEventRepository.store(event)) {
+            return null;
+        }
         return event.getId();
     }
 }

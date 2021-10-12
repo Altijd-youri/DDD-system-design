@@ -9,32 +9,38 @@ public class MemoryUserRepository implements UserRepository {
     private static final List<User> users = new ArrayList<>();
 
     @Override
+    public void clear() {
+        users.clear();
+    }
+
+    @Override
     public boolean store(User user) {
-        for (int i = 0; i < users.size(); i++){
-            if (users.get(i).getID().equals(user.getID())){
-                users.add(user);
-                return true;
+        for (User existUser : users) {
+            if (existUser.getID().equals(user.getID())) {
+                return false;
             }
         }
+        users.add(user);
         return true;
     }
 
     @Override
     public boolean update(User user) {
-       for (int i = 0; i < users.size(); i++){
-           if (users.get(i).getID().equals(user.getID())){
-               users.set(i, user);
-               return true;
-           }
+        for (User u : users) {
+            if (u.getID().equals(user.getID())) {
+                users.remove(user);
+                users.add(user);
+                return true;
+            }
         }
-       return false;
+        return false;
     }
 
     @Override
     public User get(UserID id) {
-        for (User user : users){
-            if (user.getID().equals(id)){
-                return user;
+        for (User u : users){
+            if (u.getID().equals(id)){
+                return u;
             }
         }
         return null;

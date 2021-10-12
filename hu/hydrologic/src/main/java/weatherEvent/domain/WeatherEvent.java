@@ -1,5 +1,7 @@
 package weatherEvent.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +11,15 @@ public class WeatherEvent {
     private Location location;
     private Date timeStamp;
     private UserID reportedBy;
+    private Picture picture;
+
+    public WeatherEvent(WeatherEventID id, UserID reporter, Location location, Date timeStamp) {
+        this.id = id;
+        this.location = location;
+        this.timeStamp = timeStamp;
+        this.reportedBy = reporter;
+        this.measurements = new ArrayList<>();
+    }
 
     public WeatherEvent(WeatherEventID id, UserID reporter, List<Measurement> measurements, Location location, Date timeStamp) {
         this.id = id;
@@ -16,6 +27,34 @@ public class WeatherEvent {
         this.location = location;
         this.timeStamp = timeStamp;
         this.reportedBy = reporter;
+    }
+
+    public UserID getReporterId() {
+        return reportedBy;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void addPicture(Picture newPicture) {
+        this.picture = newPicture;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void addMeasurement(Measurement measurement) {
+        measurements.add(measurement);
+    }
+
+    public void removeMeasurement(Measurement measurement) {
+        measurements.remove(measurement);
+    }
+
+    public List<Measurement> getMeasurements() {
+        return Collections.unmodifiableList(measurements);
     }
 
     public WeatherEventID getId() {

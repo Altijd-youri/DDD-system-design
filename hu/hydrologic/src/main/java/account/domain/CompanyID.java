@@ -1,5 +1,7 @@
 package account.domain;
 
+import java.util.Objects;
+
 public class CompanyID {
     private final String id;
 
@@ -9,6 +11,16 @@ public class CompanyID {
 
     @Override
     public String toString() {
-        return id ;
+        return this.id ;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof CompanyID) && this.id.equals(obj.toString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -15,6 +15,15 @@ public class User {
     private String lastName;
     private final SavedLocationRepository savedLocationRepository = new MemorySavedLocationRepository();
 
+    public User(CompanyID companyID, Email email, Role role, String firstName, String lastName) {
+        this.companyID = companyID;
+        this.email = email;
+        this.role = role;
+        this.savedLocationIDs = new HashSet<>();
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public User(UserID userID, CompanyID companyID, Email email, Role role, String firstName, String lastName) {
         this.userID = userID;
         this.companyID = companyID;
@@ -41,5 +50,9 @@ public class User {
 
     public UserID getID() {
         return this.userID;
+    }
+
+    public CompanyID getCompany() {
+        return this.companyID;
     }
 }
