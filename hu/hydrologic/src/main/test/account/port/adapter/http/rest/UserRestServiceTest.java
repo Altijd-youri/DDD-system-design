@@ -26,22 +26,41 @@ public class UserRestServiceTest {
     }
 
     @Test
-    public void addUserToCompany_isUserExisting() {
+    public void addUserToCompany_isUserNotFound1() {
+        companyRepository.store(new Company(new CompanyID("google"), null, null, null));
+
         assertThrows(UserException.class, () -> userRestService.addUserToCompany("user123", "google"));
+    }
+
+    @Test
+    public void addUserToCompany_isUserNotFound2() {
+        companyRepository.store(new Company(new CompanyID("google"), null, null, null));
         userRepository.store(new User(new UserID("user321"), null, null, null, null, null));
+
         assertThrows(UserException.class, () -> userRestService.addUserToCompany("user123", "google"));
     }
 
     @Test
-    public void addUserToCompany_isCompanyExisting() {
-        assertThrows(CompanyException.class, () -> userRestService.addUserToCompany("user123", "google"));
-        companyRepository.store(new Company(new CompanyID("microsoft"), null, null, null));
+    public void addUserToCompany_isCompanyNotFound1() throws Exception {
+        userRepository.store(new User(new UserID("user123"), null, null, null, null, null));
+
         assertThrows(CompanyException.class, () -> userRestService.addUserToCompany("user123", "google"));
     }
 
     @Test
-    public void addUserToCompany_isUserAdded() throws Exception {
+    public void addUserToCompany_isCompanyNotFound2() throws Exception {
+        userRepository.store(new User(new UserID("user123"), null, null, null, null, null));
+        companyRepository.store(new Company(new CompanyID("microsoft"), null, null, null));
+
+        assertThrows(CompanyException.class, () -> userRestService.addUserToCompany("user123", "google"));
+    }
+
+    @Test
+    public void addUserToCompany_isCompanySet() throws Exception {
+        userRepository.store(new User(new UserID("user123"), null, null, null, null, null));
+        companyRepository.store(new Company(new CompanyID("google"), null, null, null));
         userRestService.addUserToCompany("user123", "google");
+
         assertEquals(userRepository.get(new UserID("user123")).getCompany().toString(), "google");
     }
 }

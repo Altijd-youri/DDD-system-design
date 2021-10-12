@@ -27,11 +27,11 @@ public class UserApplicationService {
         Company company = companyRepository.get(new CompanyID(companyID));
 
         if (user == null) {
-            throw new Exception("Tried to retrieve user with ID: \"" + userID + "\"");
+            throw new UserException(userID);
         }
 
         if (company == null) {
-            throw new Exception("Tried to retrieve company with ID: \"" + companyID + "\"");
+            throw new CompanyException(companyID);
         }
 
         user.setCompany(new CompanyID(companyID));
