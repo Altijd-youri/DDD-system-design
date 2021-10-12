@@ -1,8 +1,8 @@
-package weatherEvent.Application;
+package weatherEvent.application;
 
 import account.domain.UserException;
 import weatherEvent.domain.*;
-import weatherEvent.domain.services.CollaborationService;
+import weatherEvent.port.adapter.services.CollaborationService;
 import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
 
 import java.util.Date;

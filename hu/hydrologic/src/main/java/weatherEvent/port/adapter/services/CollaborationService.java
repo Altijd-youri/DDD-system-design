@@ -1,4 +1,4 @@
-package weatherEvent.domain.services;
+package weatherEvent.port.adapter.services;
 
 import account.port.adapter.http.rest.UserRestService;
 import weatherEvent.domain.UserID;

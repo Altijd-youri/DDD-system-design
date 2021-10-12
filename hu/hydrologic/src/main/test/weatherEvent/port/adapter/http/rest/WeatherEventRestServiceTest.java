@@ -1,86 +1,65 @@
 package weatherEvent.port.adapter.http.rest;
 
-import account.domain.UserID;
+import account.domain.User;
 import account.domain.UserRepository;
-import account.port.adapter.http.rest.UserRestService;
-import org.junit.jupiter.api.*;
+import account.port.adapter.persistence.MemoryUserRepository;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import weatherEvent.domain.UserID;
+import weatherEvent.domain.WeatherEvent;
 import weatherEvent.domain.WeatherEventID;
+import weatherEvent.domain.WeatherEventRepository;
+import weatherEvent.port.adapter.persistence.MemoryWeatherEventRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class WeatherEventRestServiceTest {
-    static WeatherEventRESTService weatherService;
-    static UserRestService userService;
-
-    static UserID testUser;
+class WeatherEventRestServiceTest {
+    static final UserRepository userRepository = new MemoryUserRepository();
+    static final WeatherEventRestService weatherEventRESTService = new WeatherEventRestService();
+    static final WeatherEventRepository weatherEventRepository = new MemoryWeatherEventRepository();
+    static WeatherEventID weatherEventID;
 
     @BeforeAll
-    public void testInit() {
-        this.weatherService = new WeatherEventRESTService();
-        this.userService = new UserRestService();
-        testUser = userService.makeUser("test-company", "WeatherEvents", "TestUser", "WeatherEventsTestUser@example.com");
-        // TODO: Depending on how the user memory repository and JUnit work, this test user could be getting added multiple times. But this doesn't seem to return null, so probably fine?
+    static void beforeAll() {
+        final Date currDate = new Date();
+        weatherEventID = new WeatherEventID(currDate, new UserID("1"));
+        final WeatherEvent weatherEvent = new WeatherEvent(weatherEventID, null,null, null, currDate);
+
+        userRepository.store(new User(new account.domain.UserID("1"), null, null, null, null, null));
+        weatherEventRepository.get(weatherEventID);
+        weatherEventRepository.store(weatherEvent);
     }
 
     @Test
-    public void useCaseMakeSingleEvent() {
-        List<List<String>> measurements = new ArrayList<>();
-        List<String> firstMeasurement = new ArrayList<>();
-        firstMeasurement.add("10");
-        firstMeasurement.add("mm");
-        measurements.add(firstMeasurement);
-        List<String> secondMeasurement = new ArrayList<>();
-        secondMeasurement.add("14");
-        secondMeasurement.add("ml");
-        measurements.add(secondMeasurement);
-        WeatherEventID newEventId = weatherService.newWeatherEvent(testUser.toString(), "20.0", "50.0", measurements);
-        assertNotNull(newEventId, "Created weather event id is null, likely failed to store it to the database.");
+    void addPictureWeatherEventIsNull(){
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", new Byte[]{5,1,3,4,5}, new WeatherEventID(null, null)));
     }
 
     @Test
-    public void useCaseMakeTwoEvents() {
-        WeatherEventID firstEventID = weatherService.newWeatherEvent(testUser.toString(), "20.0", "50.0");
-        assertNotNull(firstEventID, "Created weather event id is null, likely failed to store it to the database.");
+    void addPictureWeatherEventDoesNotExist(){
+        final Date currDate = new Date();
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", new Byte[]{5,1,3,4,5}, new WeatherEventID(currDate, new UserID("2"))));
     }
 
     @Test
-    public void invalidUserId() {
-        Exception thrownException = assertThrows(RuntimeException.class, () -> {
-            WeatherEventID newEventId = weatherService.newWeatherEvent("invalid-user-id", "20.0", "50.0");
-        }, "Didn't throw an exception when given an invalid UserId!");
-
-        assertEquals(thrownException.getMessage(), "Given user doesn't exist!");
+    void addPictureUserDoesNotExist(){
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("2", "hallo", new Byte[]{5,1,3,4,5}, weatherEventID));
     }
 
     @Test
-    public void invalidWeatherUnit() {
-        List<List<String>> measurements = new ArrayList<>();
-        List<String> measurement = new ArrayList<>();
-        measurement.add("10");
-        measurement.add("invalid-unit");
-        measurements.add(measurement);
-        Exception thrownException = assertThrows(RuntimeException.class, () -> {
-            WeatherEventID newEventId = weatherService.newWeatherEvent(testUser.toString(), "20.0", "50.0", measurements);
-        }, "Didn't throw an exception when given an invalid unit!");
-
-        assertEquals(thrownException.getMessage(), "That's not a valid measurement unit and can't be converted to the correct representation.");
+    void addPictureUserisNull(){
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture(null, "hallo", new Byte[]{5,1,3,4,5}, weatherEventID));
     }
 
     @Test
-    public void negativeWeatherMeasurement() {
-        List<List<String>> measurements = new ArrayList<>();
-        List<String> measurement = new ArrayList<>();
-        measurement.add("-10");
-        measurement.add("ml");
-        measurements.add(measurement);
-        Exception thrownException = assertThrows(RuntimeException.class, () -> {
-            WeatherEventID newEventId = weatherService.newWeatherEvent(testUser.toString(), "20.0", "50.0", measurements);
-        }, "Didn't throw an exception when given a negative measurement!");
+    void addPictureImageIsNull(){
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", null, weatherEventID));
+    }
 
-        assertEquals(thrownException.getMessage(), "Can't give measurements with negative values.");
+    @Test
+    void addPicture(){
+        assertDoesNotThrow(() -> weatherEventRESTService.addPicture("1", "hallo", new Byte[]{5,1,3,4,5}, weatherEventID));
     }
 }

@@ -1,15 +1,12 @@
 package weatherEvent.port.adapter.http.rest;
 
-import weatherEvent.Application.WeatherEventApplicationService;
-import weatherEvent.domain.Measurement;
-import weatherEvent.domain.MeasurementUnit;
-import weatherEvent.domain.UserID;
-import weatherEvent.domain.WeatherEventID;
+import weatherEvent.application.WeatherEventApplicationService;
+import weatherEvent.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherEventRESTService {
+public class WeatherEventRestService {
     WeatherEventApplicationService weatherEventApplicationService = new WeatherEventApplicationService();
 
     public WeatherEventID newWeatherEvent(String Uid, String longitude, String latitude, List<List<String>> measurements) {
@@ -18,5 +15,9 @@ public class WeatherEventRESTService {
 
     public WeatherEventID newWeatherEvent(String Uid, String longitude, String latitude) {
         return newWeatherEvent(Uid, longitude, latitude, new ArrayList<>());
+    }
+
+    public void addPicture(String uid, String description, Byte[] image, WeatherEventID weatherEventID) throws Exception{
+        weatherEventApplicationService.addPicture(uid, description, image, weatherEventID);
     }
 }

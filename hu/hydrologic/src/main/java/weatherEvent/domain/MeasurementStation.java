@@ -1,7 +1,7 @@
 package weatherEvent.domain;
 
-import weatherEvent.Application.WeatherEventApplicationService;
-import weatherEvent.domain.services.CollaborationService;
+import weatherEvent.application.WeatherEventApplicationService;
+import weatherEvent.port.adapter.services.CollaborationService;
 
 import java.util.ArrayList;
 import java.util.Date;

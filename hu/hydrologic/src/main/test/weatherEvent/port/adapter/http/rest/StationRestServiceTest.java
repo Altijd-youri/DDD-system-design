@@ -5,20 +5,17 @@ import account.port.adapter.persistence.MemoryUserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import weatherEvent.domain.Location;
 import weatherEvent.domain.MeasurementStation;
 import weatherEvent.domain.MeasurementStationIdentity;
 import weatherEvent.domain.MeasurementStationRepository;
 import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StationRESTServiceTest {
-    private static StationRESTService restService;
+public class StationRestServiceTest {
+    private static StationRestService restService;
     private static MeasurementStationRepository stationRepository;
 
     @BeforeAll
@@ -27,7 +24,7 @@ public class StationRESTServiceTest {
         stationRepository = new MemoryMeasurementStationRepository();
         User user = new User(new account.domain.UserID("1"), new CompanyID("1"), new Email("user1@test.com"), Role.EMPLOYEE, "John", "Doe");
         repository.store(user);
-        restService = new StationRESTService();
+        restService = new StationRestService();
     }
 
     @Test

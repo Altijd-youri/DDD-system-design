@@ -1,7 +1,7 @@
-package weatherEvent.Application;
+package weatherEvent.application;
 
 import weatherEvent.domain.*;
-import weatherEvent.domain.services.CollaborationService;
+import weatherEvent.port.adapter.services.CollaborationService;
 import weatherEvent.port.adapter.persistence.MemoryWeatherEventRepository;
 
 import java.util.Date;
@@ -32,5 +32,22 @@ public class WeatherEventApplicationService {
             return null;
         }
         return event.getId();
+    }
+
+
+    public void addPicture(String uid, String description, Byte[] image, WeatherEventID weatherEventID) throws Exception {
+        CollaborationService collaborationService = new CollaborationService();
+        if (collaborationService.userExists(new UserID(uid))){
+            if (weatherEventRepository.get(weatherEventID)!=null) {
+                WeatherEvent event = weatherEventRepository.get(weatherEventID);
+                event.addPicture(image,description);
+                weatherEventRepository.update(event);
+            }
+            else {
+                throw new Exception("This weatherEvent doesn't exist");
+            }
+        }else {
+            throw new Exception("This user doesn't exist");
+        }
     }
 }

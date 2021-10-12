@@ -1,14 +1,10 @@
-package weatherEvent.Domain;
+package weatherEvent.domain;
 
 import account.domain.*;
 import account.port.adapter.persistence.MemoryUserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import weatherEvent.domain.Location;
-import weatherEvent.domain.MeasurementStation;
-import weatherEvent.domain.MeasurementStationIdentity;
-import weatherEvent.domain.UserID;
 
 import java.util.Date;
 
