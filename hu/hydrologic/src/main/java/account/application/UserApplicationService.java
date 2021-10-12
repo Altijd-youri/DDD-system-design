@@ -22,7 +22,7 @@ public class UserApplicationService {
         }
     }
 
-    public void addUserToCompany(String userID, String companyID) throws Exception {
+    public void addUserToCompany(String userID, String companyID) throws UserException, CompanyException {
         User user = userRepository.get(new UserID(userID));
         Company company = companyRepository.get(new CompanyID(companyID));
 
