@@ -9,7 +9,7 @@ public class UserRestService {
         userApplicationService.userAddSavedLocation(latitude,longitude,name,userID);
     }
 
-    public void addUserToCompany(String userID, String companyID) {
+    public void addUserToCompany(String userID, String companyID) throws Exception {
         userApplicationService.addUserToCompany(userID, companyID);
     }
 

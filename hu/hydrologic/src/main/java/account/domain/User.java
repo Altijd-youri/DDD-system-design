@@ -40,6 +40,7 @@ public class User {
         return this.userID;
     }
 
-    public void setCompany(String companyID) {
+    public CompanyID getCompany() {
+        return this.companyID;
     }
 }
