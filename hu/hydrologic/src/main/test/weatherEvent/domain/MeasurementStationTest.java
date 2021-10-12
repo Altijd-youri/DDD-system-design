@@ -5,14 +5,16 @@ import account.port.adapter.persistence.MemoryUserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MeasurementStationTest {
     @BeforeAll
-    static void setup() {
+    void setup() {
         UserRepository repository = new MemoryUserRepository();
         User user = new User(new account.domain.UserID("1"), new CompanyID("1"), new Email("user1@test.com"), Role.EMPLOYEE, "John", "Doe");
         repository.store(user);

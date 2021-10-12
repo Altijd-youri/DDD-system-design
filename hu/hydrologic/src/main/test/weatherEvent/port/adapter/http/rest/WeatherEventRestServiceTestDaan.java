@@ -15,7 +15,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WeatherEventRestServiceTest {
+class WeatherEventRestServiceTestDaan {
     static final UserRepository userRepository = new MemoryUserRepository();
     static final WeatherEventRestService weatherEventRESTService = new WeatherEventRestService();
     static final WeatherEventRepository weatherEventRepository = new MemoryWeatherEventRepository();
@@ -25,7 +25,7 @@ class WeatherEventRestServiceTest {
     static void beforeAll() {
         final Date currDate = new Date();
         weatherEventID = new WeatherEventID(currDate, new UserID("1"));
-        final WeatherEvent weatherEvent = new WeatherEvent(weatherEventID, null,null, null, currDate);
+        final WeatherEvent weatherEvent = new WeatherEvent(weatherEventID, null, null, currDate);
 
         userRepository.store(new User(new account.domain.UserID("1"), null, null, null, null, null));
         weatherEventRepository.get(weatherEventID);

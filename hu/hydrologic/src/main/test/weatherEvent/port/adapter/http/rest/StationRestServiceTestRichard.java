@@ -5,6 +5,7 @@ import account.port.adapter.persistence.MemoryUserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import weatherEvent.domain.MeasurementStation;
 import weatherEvent.domain.MeasurementStationIdentity;
 import weatherEvent.domain.MeasurementStationRepository;
@@ -14,12 +15,13 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StationRestServiceTest {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class StationRestServiceTestRichard {
     private static StationRestService restService;
     private static MeasurementStationRepository stationRepository;
 
     @BeforeAll
-    static void setup() {
+    void setup() {
         UserRepository repository = new MemoryUserRepository();
         stationRepository = new MemoryMeasurementStationRepository();
         User user = new User(new account.domain.UserID("1"), new CompanyID("1"), new Email("user1@test.com"), Role.EMPLOYEE, "John", "Doe");

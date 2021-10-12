@@ -18,15 +18,7 @@ public class WeatherEventApplicationService {
 
         Date currDate = new Date();
         WeatherEventID eventID = new WeatherEventID(currDate, userID);
-        WeatherEvent event = new WeatherEvent(eventID, userID, new Location(longitude, latitude), currDate);
-
-        for (List<String> measurement : measurements) {
-            Double value = Double.parseDouble(measurement.get(0));
-            MeasurementUnit unit = new MeasurementUnit(measurement.get(1));
-
-            Measurement newMeasurement = new Measurement(unit, value);
-            event.addMeasurement(newMeasurement);
-        }
+        WeatherEvent event = new WeatherEvent(eventID, userID, measurements, new Location(longitude, latitude), currDate);
 
         if (!weatherEventRepository.store(event)) {
             return null;
