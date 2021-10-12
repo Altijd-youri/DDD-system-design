@@ -21,12 +21,24 @@ public class WeatherEvent {
         this.measurements = new ArrayList<>();
     }
 
-    public WeatherEvent(WeatherEventID id, UserID reporter, List<Measurement> measurements, Location location, Date timeStamp) {
+    public WeatherEvent(WeatherEventID id, UserID reporter, List<List<String>> measurements, Location location, Date timeStamp) {
         this.id = id;
-        this.measurements = measurements;
+
+        // Parse measurements and then add them
+        this.measurements = new ArrayList<>();
+        for (List<String> measurement : measurements) {
+            Double value = Double.parseDouble(measurement.get(0));
+            MeasurementUnit unit = new MeasurementUnit(measurement.get(1));
+            this.addMeasurement(unit, value);
+        }
+
         this.location = location;
         this.timeStamp = timeStamp;
         this.reportedBy = reporter;
+    }
+
+    private void addMeasurement(MeasurementUnit unit, Double value) {
+        this.measurements.add(new Measurement(unit, value));
     }
 
     public UserID getReporterId() {

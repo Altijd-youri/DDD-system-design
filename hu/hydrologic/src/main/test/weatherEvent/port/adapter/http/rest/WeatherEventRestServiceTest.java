@@ -25,7 +25,7 @@ public class WeatherEventRestServiceTest {
         this.weatherService = new WeatherEventRESTService();
         this.userService = new UserRestService();
         testUser = userService.makeUser("test-company", "WeatherEvents", "TestUser", "WeatherEventsTestUser@example.com");
-        // TODO: Depending on how the user memory repository and JUnit work, this test user could be getting added multiple times. But this doesn't seem to return null, so probably fine?
+        // Depending on how the user memory repository and JUnit work, this test user could be getting added multiple times. But this doesn't seem to return null, so probably fine?
     }
 
     @Test
