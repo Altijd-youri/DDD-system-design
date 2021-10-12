@@ -19,7 +19,7 @@ public class WeatherEventApplicationService {
     }
 
 
-    public void addPicture(String uid, String description, Byte[] image, WeatherEventID weatherEventID) {
+    public void addPicture(String uid, String description, Byte[] image, WeatherEventID weatherEventID) throws Exception {
         CollaborationService collaborationService = new CollaborationService();
         if (collaborationService.userExists(new UserID(uid))){
             if (weatherEventRepository.get(weatherEventID)!=null) {
@@ -27,6 +27,11 @@ public class WeatherEventApplicationService {
                 event.addPicture(image, description);
                 weatherEventRepository.update(event);
             }
+            else {
+                throw new Exception("This weatherEvent doesn't exist");
+            }
+        }else {
+            throw new Exception("This user doesn't exist");
         }
     }
 }
