@@ -1,5 +1,7 @@
 package account.domain;
 
+import java.util.Objects;
+
 public class SavedLocationID {
     private final String id;
 
@@ -15,5 +17,10 @@ public class SavedLocationID {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof SavedLocationID) && this.id.equals(obj.toString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
