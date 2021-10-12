@@ -9,6 +9,11 @@ public class MemoryUserRepository implements UserRepository {
     private static final List<User> users = new ArrayList<>();
 
     @Override
+    public void clear() {
+        users.clear();
+    }
+
+    @Override
     public boolean store(User user) {
         for (User u : users) {
             if (u.getID().toString().equals(user.getID().toString())) {

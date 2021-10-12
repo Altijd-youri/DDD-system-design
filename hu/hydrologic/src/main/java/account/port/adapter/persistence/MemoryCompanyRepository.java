@@ -9,6 +9,11 @@ public class MemoryCompanyRepository implements CompanyRepository {
     private static final List<Company> companies = new ArrayList<>();
 
     @Override
+    public void clear() {
+        companies.clear();
+    }
+
+    @Override
     public boolean store(Company company) {
         for (Company c : companies) {
             if (c.getID().toString().equals(company.getID().toString())) {
