@@ -1,11 +1,10 @@
 package weatherEvent.domain;
 
-import weatherEvent.port.adapter.services.CollaborationService;
+import weatherEvent.domain.services.CollaborationService;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 public class MeasurementStation {
     private UserID owner;

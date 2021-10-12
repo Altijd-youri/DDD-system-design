@@ -32,12 +32,15 @@ public class StationApplicationService {
         return parsedMeasurements;
     }
 
-    public boolean createMeasurementStation(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {
+    public MeasurementStationIdentity createMeasurementStation(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {
         MeasurementStationIdentity stationId = this.repository.nextIdentity();
-
         MeasurementStation measurementStation = new MeasurementStation(new UserID(userId), stationId, lastCalibratedAt, new Location(latitude, longitude), name);
 
-        return this.repository.store(measurementStation);
+        if(!this.repository.store(measurementStation)) {
+            return null;
+        }
+
+        return stationId;
     }
 
 }
