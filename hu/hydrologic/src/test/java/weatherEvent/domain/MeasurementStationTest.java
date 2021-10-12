@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,16 +36,14 @@ public class MeasurementStationTest {
     @Test
     @DisplayName("Create a measurement station which has been calibrated almost a year ago")
     public void createMeasurementStationCalibrationMonthsAgo() {
-        final long millisecondsInAYear = 31557600000L;
-        final long millisecondsInADay = 1000 * 60 * 60 * 24;
-        Date currentDate = new Date();
-        Date dateYearAgoMinusADay = new Date(currentDate.getTime() - millisecondsInAYear + millisecondsInADay);
-
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        calendar.add(Calendar.DATE, 1);
 
         assertDoesNotThrow(() -> new MeasurementStation(
                 new UserID("1"),
                 new MeasurementStationID(String.valueOf(1)),
-                dateYearAgoMinusADay,
+                calendar.getTime(),
                 new Location(52.029421, 5.201923),
                 "Measurement station 1"
         ));
@@ -65,14 +64,12 @@ public class MeasurementStationTest {
     @Test
     @DisplayName("Collaboration to long ago")
     public void createMeasurementStationCalibrationToLangAgo() {
-        final long millisecondsInAYear = 31557600000L;
-
-        Date currentDate = new Date();
-        Date dateYearAgo = new Date(currentDate.getTime() - millisecondsInAYear);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
         assertThrows(Exception.class, () -> new MeasurementStation(
                 new UserID("1"),
                 new MeasurementStationID(String.valueOf(1)),
-                dateYearAgo,
+                calendar.getTime(),
                 new Location(52.029421, 5.201923),
                 "Measurement station 1"
         ), "Last calibration time can't be longer than 1 year ago.");
