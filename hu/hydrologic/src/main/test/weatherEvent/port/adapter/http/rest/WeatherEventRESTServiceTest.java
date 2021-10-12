@@ -34,27 +34,32 @@ class WeatherEventRESTServiceTest {
 
     @Test
     void addPictureWeatherEventIsNull(){
-        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", null, new WeatherEventID(null, null)));
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", new Byte[]{5,1,3,4,5}, new WeatherEventID(null, null)));
     }
 
     @Test
     void addPictureWeatherEventDoesNotExist(){
         final Date currDate = new Date();
-        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", null, new WeatherEventID(currDate, new UserID("2"))));
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", new Byte[]{5,1,3,4,5}, new WeatherEventID(currDate, new UserID("2"))));
     }
 
     @Test
     void addPictureUserDoesNotExist(){
-        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("2", "hallo", null, weatherEventID));
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("2", "hallo", new Byte[]{5,1,3,4,5}, weatherEventID));
     }
 
     @Test
     void addPictureUserisNull(){
-        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture(null, "hallo", null, weatherEventID));
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture(null, "hallo", new Byte[]{5,1,3,4,5}, weatherEventID));
+    }
+
+    @Test
+    void addPictureImageIsNull(){
+        assertThrows(Exception.class, () -> weatherEventRESTService.addPicture("1", "hallo", null, weatherEventID));
     }
 
     @Test
     void addPicture(){
-        assertDoesNotThrow(() -> weatherEventRESTService.addPicture("1", "hallo", null, weatherEventID));
+        assertDoesNotThrow(() -> weatherEventRESTService.addPicture("1", "hallo", new Byte[]{5,1,3,4,5}, weatherEventID));
     }
 }

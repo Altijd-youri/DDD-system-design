@@ -24,7 +24,11 @@ public class WeatherEvent {
         return this.id;
     }
 
-    public void addPicture(Byte[] image, String description){
-        picture = new Picture(image,description);
+    public void addPicture(Byte[] image, String description) throws Exception {
+        if (image!= null && image.length>0) {
+            picture = new Picture(image, description);
+        }else {
+            throw new Exception("image moet gevuld zijn");
+        }
     }
 }

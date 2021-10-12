@@ -24,7 +24,7 @@ public class WeatherEventApplicationService {
         if (collaborationService.userExists(new UserID(uid))){
             if (weatherEventRepository.get(weatherEventID)!=null) {
                 WeatherEvent event = weatherEventRepository.get(weatherEventID);
-                event.addPicture(image, description);
+                event.addPicture(image,description);
                 weatherEventRepository.update(event);
             }
             else {
