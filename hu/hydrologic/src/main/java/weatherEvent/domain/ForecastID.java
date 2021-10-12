@@ -1,9 +1,9 @@
 package weatherEvent.domain;
 
-public class ForecastIdentity {
+public class ForecastID {
     private final String id;
 
-    public ForecastIdentity(String id) {
+    public ForecastID(String id) {
         this.id = id;
     }
 }

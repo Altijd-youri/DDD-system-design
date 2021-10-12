@@ -2,10 +2,10 @@ package weatherEvent.domain;
 
 import java.util.Objects;
 
-public class MeasurementStationIdentity {
+public class MeasurementStationID {
     private final String id;
 
-    public MeasurementStationIdentity(String id) {
+    public MeasurementStationID(String id) {
         this.id = id;
     }
 
@@ -18,7 +18,7 @@ public class MeasurementStationIdentity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MeasurementStationIdentity that = (MeasurementStationIdentity) o;
+        MeasurementStationID that = (MeasurementStationID) o;
         return Objects.equals(id, that.id);
     }
 

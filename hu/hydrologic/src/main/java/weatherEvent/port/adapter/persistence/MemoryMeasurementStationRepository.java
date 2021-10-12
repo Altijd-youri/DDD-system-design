@@ -3,23 +3,21 @@ package weatherEvent.port.adapter.persistence;
 import weatherEvent.domain.*;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
-    static Map<MeasurementStationIdentity, MeasurementStation> savedStations = new HashMap();
+    static Map<MeasurementStationID, MeasurementStation> savedStations = new HashMap();
     private static long id = 0;
 
     @Override
-    public MeasurementStationIdentity nextIdentity() {
+    public MeasurementStationID nextIdentity() {
         id++;
-        return new MeasurementStationIdentity(String.valueOf(id));
+        return new MeasurementStationID(String.valueOf(id));
     }
 
     @Override
     public MeasurementStation stationOfUserById(UserID Uid, String mStationId) throws Exception {
-        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
+        MeasurementStationID toFind = new MeasurementStationID(mStationId);
 
         MeasurementStation found = savedStations.get(toFind);
         if (found != null) {
@@ -37,7 +35,7 @@ public class MemoryMeasurementStationRepository implements MeasurementStationRep
 
     @Override
     public boolean delete(String mStationId) {
-        MeasurementStationIdentity toFind = new MeasurementStationIdentity(mStationId);
+        MeasurementStationID toFind = new MeasurementStationID(mStationId);
 
         MeasurementStation previous = savedStations.remove(toFind);
         return previous != null;

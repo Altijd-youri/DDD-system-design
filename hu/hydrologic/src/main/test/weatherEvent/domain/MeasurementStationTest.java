@@ -25,7 +25,7 @@ public class MeasurementStationTest {
     public void createMeasurementStation() {
         assertDoesNotThrow(() -> new MeasurementStation(
                 new UserID("1"),
-                new MeasurementStationIdentity(String.valueOf(1)),
+                new MeasurementStationID(String.valueOf(1)),
                 new Date(),
                 new Location(52.029421, 5.201923),
                 "Measurement station 1"
@@ -43,7 +43,7 @@ public class MeasurementStationTest {
 
         assertDoesNotThrow(() -> new MeasurementStation(
                 new UserID("1"),
-                new MeasurementStationIdentity(String.valueOf(1)),
+                new MeasurementStationID(String.valueOf(1)),
                 dateYearAgoMinusADay,
                 new Location(52.029421, 5.201923),
                 "Measurement station 1"
@@ -55,7 +55,7 @@ public class MeasurementStationTest {
     public void createMeasurementStationUserNotExists() {
         assertThrows(Exception.class, () -> new MeasurementStation(
                 new UserID("2"),
-                new MeasurementStationIdentity(String.valueOf(1)),
+                new MeasurementStationID(String.valueOf(1)),
                 new Date(),
                 new Location(52.029421, 5.201923),
                 "Measurement station 1"
@@ -71,7 +71,7 @@ public class MeasurementStationTest {
         Date dateYearAgo = new Date(currentDate.getTime() - millisecondsInAYear);
         assertThrows(Exception.class, () -> new MeasurementStation(
                 new UserID("1"),
-                new MeasurementStationIdentity(String.valueOf(1)),
+                new MeasurementStationID(String.valueOf(1)),
                 dateYearAgo,
                 new Location(52.029421, 5.201923),
                 "Measurement station 1"

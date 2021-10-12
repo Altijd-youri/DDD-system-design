@@ -24,8 +24,8 @@ public class StationApplicationService {
         repository.store(mStation);
     }
 
-    public MeasurementStationIdentity createMeasurementStation(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {
-        MeasurementStationIdentity stationId = this.repository.nextIdentity();
+    public MeasurementStationID createMeasurementStation(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {
+        MeasurementStationID stationId = this.repository.nextIdentity();
         MeasurementStation measurementStation = new MeasurementStation(new UserID(userId), stationId, lastCalibratedAt, new Location(latitude, longitude), name);
 
         if(!this.repository.store(measurementStation)) {

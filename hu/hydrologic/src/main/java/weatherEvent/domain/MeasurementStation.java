@@ -10,7 +10,7 @@ import java.util.List;
 public class MeasurementStation {
     WeatherEventApplicationService eventApplication = new WeatherEventApplicationService();
     private UserID owner;
-    private MeasurementStationIdentity id;
+    private MeasurementStationID id;
     private List<WeatherEventID> events;
     private Date lastCalibratedAt;
     private Location location;
@@ -24,7 +24,7 @@ public class MeasurementStation {
      * @param name
      * @throws Exception - Throws exception if lastCalibratedAt is longer than 1 year ago.
      */
-    public MeasurementStation(UserID owner, MeasurementStationIdentity id, Date lastCalibratedAt, Location location, String name) throws Exception{
+    public MeasurementStation(UserID owner, MeasurementStationID id, Date lastCalibratedAt, Location location, String name) throws Exception{
         checkLastCalibration(lastCalibratedAt);
 
         CollaborationService collaborationService = new CollaborationService();
@@ -58,7 +58,7 @@ public class MeasurementStation {
         events.add(event);
     }
 
-    public MeasurementStationIdentity getIdentity() {
+    public MeasurementStationID getIdentity() {
         return id;
     }
 

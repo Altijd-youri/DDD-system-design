@@ -1,7 +1,7 @@
 package weatherEvent.port.adapter.http.rest;
 
 import weatherEvent.application.StationApplicationService;
-import weatherEvent.domain.MeasurementStationIdentity;
+import weatherEvent.domain.MeasurementStationID;
 
 import java.util.Date;
 import java.util.List;
@@ -17,7 +17,7 @@ public class StationRestService {
         }
     }
 
-    public MeasurementStationIdentity create(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {
+    public MeasurementStationID create(String userId, Date lastCalibratedAt, double latitude, double longitude, String name) throws Exception {
         return this.applicationService.createMeasurementStation(userId, lastCalibratedAt, latitude, longitude, name);
     }
 }

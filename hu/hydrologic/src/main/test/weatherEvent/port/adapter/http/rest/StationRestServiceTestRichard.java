@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import weatherEvent.domain.MeasurementStation;
-import weatherEvent.domain.MeasurementStationIdentity;
+import weatherEvent.domain.MeasurementStationID;
 import weatherEvent.domain.MeasurementStationRepository;
 import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
 
@@ -33,7 +33,7 @@ public class StationRestServiceTestRichard {
     @DisplayName("Create a measurement station")
     public void createMeasurementStation() {
         try {
-            MeasurementStationIdentity id = restService.create(
+            MeasurementStationID id = restService.create(
                     "1",
                     new Date(),
                     52.029421,
@@ -57,7 +57,7 @@ public class StationRestServiceTestRichard {
         Date dateYearAgoMinusADay = new Date(currentDate.getTime() - millisecondsInAYear + millisecondsInADay);
 
         try {
-            MeasurementStationIdentity id = restService.create(
+            MeasurementStationID id = restService.create(
                     "1",
                     dateYearAgoMinusADay,
                     52.029421,
@@ -105,14 +105,14 @@ public class StationRestServiceTestRichard {
     @DisplayName("Generates new on every create")
     public void generatesNewIdOnCreate() {
         try {
-            MeasurementStationIdentity msId1 = restService.create(
+            MeasurementStationID msId1 = restService.create(
                     "1",
                     new Date(),
                     52.029421,
                     5.201923,
                     "Thermometer"
             );
-            MeasurementStationIdentity msId2 = restService.create(
+            MeasurementStationID msId2 = restService.create(
                     "1",
                     new Date(),
                     52.129421,
