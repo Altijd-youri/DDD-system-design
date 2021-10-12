@@ -8,7 +8,7 @@ import account.domain.UserID;
 public class UserRestService {
     UserApplicationService userApplicationService = new UserApplicationService();
 
-    public void userAddSavedLocation(String latitude, String longitude, String name, String userID) {
+    public void userAddSavedLocation(String latitude, String longitude, String name, String userID) throws Exception {
         userApplicationService.userAddSavedLocation(latitude,longitude,name,userID);
     }
 

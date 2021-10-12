@@ -11,13 +11,12 @@ public class MemorySavedLocationRepository implements SavedLocationRepository {
 
     @Override
     public boolean store(SavedLocation savedLocation) {
-        for (int i = 0; i < savedLocations.size(); i++){
-            if (savedLocations.get(i).getID().equals(savedLocation.getID())){
-                savedLocations.add(savedLocation);
-                return true;
+        for (SavedLocation location : savedLocations) {
+            if (location.getID().equals(savedLocation.getID())) {
+                return false;
             }
         }
-        return true;
+        return savedLocations.add(savedLocation);
     }
 
     @Override

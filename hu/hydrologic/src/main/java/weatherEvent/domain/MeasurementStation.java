@@ -63,6 +63,6 @@ public class MeasurementStation {
     }
 
     public boolean isOwnedBy(UserID userID) {
-        return owner == userID;
+        return owner.equals(userID);
     }
 }

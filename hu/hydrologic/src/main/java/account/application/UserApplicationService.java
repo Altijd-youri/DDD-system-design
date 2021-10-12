@@ -10,7 +10,7 @@ public class UserApplicationService {
     private final CompanyRepository companyRepository = new MemoryCompanyRepository();
     private final SavedLocationRepository savedLocationRepository = new MemorySavedLocationRepository();
 
-    public void userAddSavedLocation(String latitude, String longitude, String name, String userID) {
+    public void userAddSavedLocation(String latitude, String longitude, String name, String userID) throws Exception {
         User user = userRepository.get(new UserID(userID));
 
         if (user != null) {
@@ -19,6 +19,8 @@ public class UserApplicationService {
             SavedLocation savedLocation = user.createSavedLocation(savedLocationID, coordinates, name);
             userRepository.update(user);
             this.savedLocationRepository.store(savedLocation);
+        }else {
+            throw new Exception("User doesn't exist");
         }
     }
 

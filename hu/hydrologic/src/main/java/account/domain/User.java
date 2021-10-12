@@ -34,11 +34,14 @@ public class User {
         this.lastName = lastName;
     }
 
-    public SavedLocation createSavedLocation(SavedLocationID savedLocationID, Coordinates coordinates, String name){
+    public SavedLocation createSavedLocation(SavedLocationID savedLocationID, Coordinates coordinates, String name) throws Exception {
+        SavedLocation savedLocation = null;
         if (this.savedLocationRepository.get(savedLocationID) == null){
-            return new SavedLocation(name, savedLocationID, coordinates);
+            savedLocation = new SavedLocation(name, savedLocationID, coordinates);
+        }else {
+            throw new Exception("SavedLocation already exist");
         }
-        return null;
+        return savedLocation;
     }
 
     public void setCompany(CompanyID companyID) {
