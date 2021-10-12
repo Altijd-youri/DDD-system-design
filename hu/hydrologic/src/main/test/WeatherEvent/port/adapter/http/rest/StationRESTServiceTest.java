@@ -39,7 +39,7 @@ public class StationRESTServiceTest {
                     new Date(),
                     52.029421,
                     5.201923,
-                    "Measurement station 1"
+                    "Thermometer"
             );
 
             MeasurementStation ms = stationRepository.stationOfUserById(new weatherEvent.domain.UserID("1"), id.toString());
@@ -100,5 +100,30 @@ public class StationRESTServiceTest {
                 5.201923,
                 "Measurement station 1"
         ), "Last calibration time can't be longer than 1 year ago");
+    }
+
+    @Test
+    @DisplayName("Generates new on every create")
+    public void generatesNewIdOnCreate() {
+        try {
+            MeasurementStationIdentity msId1 = restService.create(
+                    "1",
+                    new Date(),
+                    52.029421,
+                    5.201923,
+                    "Thermometer"
+            );
+            MeasurementStationIdentity msId2 = restService.create(
+                    "1",
+                    new Date(),
+                    52.129421,
+                    5.251923,
+                    "Thermometer"
+            );
+
+            assertNotEquals(msId1, msId2);
+        } catch(Exception e) {
+            fail(e);
+        }
     }
 }
