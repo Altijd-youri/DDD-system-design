@@ -3,7 +3,9 @@ package weatherEvent.port.adapter.persistence;
 import weatherEvent.domain.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class MemoryMeasurementStationRepository implements MeasurementStationRepository {
     static Map<MeasurementStationIdentity, MeasurementStation> savedStations = new HashMap();
@@ -30,7 +32,7 @@ public class MemoryMeasurementStationRepository implements MeasurementStationRep
     @Override
     public boolean store(MeasurementStation mStation) {
         MeasurementStation previous = savedStations.put(mStation.getIdentity(), mStation);
-        return previous != null;
+        return previous == null;
     }
 
     @Override
