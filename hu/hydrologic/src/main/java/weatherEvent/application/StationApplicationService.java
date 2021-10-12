@@ -19,6 +19,7 @@ public class StationApplicationService {
             throw new UserException("User doesn't exist");
         }
         MeasurementStation mStation = repository.stationOfUserById(Uid, mStationId);
+        if (mStation == null) throw new Exception("Station doesn't exists.");
         mStation.addWeatherEvent(measurements);
 
         repository.store(mStation);
