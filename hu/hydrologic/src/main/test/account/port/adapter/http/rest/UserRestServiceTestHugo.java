@@ -2,14 +2,15 @@ package account.port.adapter.http.rest;
 
 import account.domain.*;
 import account.port.adapter.persistence.MemoryCompanyRepository;
+import account.port.adapter.persistence.MemorySavedLocationRepository;
 import account.port.adapter.persistence.MemoryUserRepository;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class UserRestServiceTest {
+public class UserRestServiceTestHugo {
     final private UserRestService userRestService = new UserRestService();
     final private UserRepository userRepository = new MemoryUserRepository();
     final private CompanyRepository companyRepository = new MemoryCompanyRepository();
@@ -18,11 +19,6 @@ public class UserRestServiceTest {
     void before() {
         userRepository.clear();
         companyRepository.clear();
-    }
-
-    @Test
-    void userAddSavedLocation() {
-        //assertThrows(Exception.class,()->testMethod());
     }
 
     @Test
@@ -64,4 +60,3 @@ public class UserRestServiceTest {
         assertEquals(userRepository.get(new UserID("user123")).getCompany().toString(), "google");
     }
 }
-
