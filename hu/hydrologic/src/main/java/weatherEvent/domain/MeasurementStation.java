@@ -4,6 +4,7 @@ import weatherEvent.application.WeatherEventApplicationService;
 import weatherEvent.port.adapter.services.CollaborationService;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -41,9 +42,10 @@ public class MeasurementStation {
     }
 
     private void checkLastCalibration(Date lastCalibratedAt) throws Exception {
-        Date currentDate = new Date();
-        final long millisecondsInAYear = 31557600000L;
-        if(currentDate.getTime() - lastCalibratedAt.getTime() > millisecondsInAYear) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date dateYearAgo = calendar.getTime();
+        if(dateYearAgo.after(lastCalibratedAt)) {
             throw new Exception("Last calibration time can't be longer than 1 year ago");
         }
     }

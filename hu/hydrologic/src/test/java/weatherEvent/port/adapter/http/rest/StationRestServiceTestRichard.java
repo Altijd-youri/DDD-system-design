@@ -11,6 +11,7 @@ import weatherEvent.domain.MeasurementStationID;
 import weatherEvent.domain.MeasurementStationRepository;
 import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,15 +52,14 @@ public class StationRestServiceTestRichard {
     @Test
     @DisplayName("Create a measurement station which has been calibrated almost a year ago")
     public void createMeasurementStationCalibrationMonthsAgo() {
-        final long millisecondsInAYear = 31557600000L;
-        final long millisecondsInADay = 1000 * 60 * 60 * 24;
-        Date currentDate = new Date();
-        Date dateYearAgoMinusADay = new Date(currentDate.getTime() - millisecondsInAYear + millisecondsInADay);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        calendar.add(Calendar.DATE, 1);
 
         try {
             MeasurementStationID id = restService.create(
                     "1",
-                    dateYearAgoMinusADay,
+                    calendar.getTime(),
                     52.029421,
                     5.201923,
                     "Measurement station 1"
@@ -87,14 +87,12 @@ public class StationRestServiceTestRichard {
     @Test
     @DisplayName("Collaboration to long ago")
     public void createMeasurementStationCalibrationToLangAgo() {
-        final long millisecondsInAYear = 31557600000L;
-
-        Date currentDate = new Date();
-        Date dateYearAgo = new Date(currentDate.getTime() - millisecondsInAYear);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
 
         assertThrows(Exception.class, () -> restService.create(
                 "2",
-                dateYearAgo,
+                calendar.getTime(),
                 52.029421,
                 5.201923,
                 "Measurement station 1"
