@@ -13,26 +13,30 @@ public class UserApplicationService {
     public void userAddSavedLocation(String latitude, String longitude, String name, String userID) {
         User user = userRepository.get(new UserID(userID));
 
-        if (user != null){
+        if (user != null) {
             SavedLocationID savedLocationID = this.savedLocationRepository.nextIdentity();
-            Coordinates coordinates = new Coordinates( Double.parseDouble(longitude), Double.parseDouble(latitude));
-            SavedLocation savedLocation = user.createSavedLocation(savedLocationID, coordinates ,name);
+            Coordinates coordinates = new Coordinates(Double.parseDouble(longitude), Double.parseDouble(latitude));
+            SavedLocation savedLocation = user.createSavedLocation(savedLocationID, coordinates, name);
             userRepository.update(user);
             this.savedLocationRepository.store(savedLocation);
         }
-
-
     }
-  
-    public void addUserToCompany(String userID, String companyID) {
-          User user = userRepository.get(new UserID(userID));
-          Company company = companyRepository.get(new CompanyID(companyID));
 
-          if(user != null && company != null) {
-              user.setCompany(new CompanyID(companyID));
-              userRepository.update(user);
-          }
-      }
+    public void addUserToCompany(String userID, String companyID) throws Exception {
+        User user = userRepository.get(new UserID(userID));
+        Company company = companyRepository.get(new CompanyID(companyID));
+
+        if (user == null) {
+            throw new Exception("Tried to retrieve user with ID: \"" + userID + "\"");
+        }
+
+        if (company == null) {
+            throw new Exception("Tried to retrieve company with ID: \"" + companyID + "\"");
+        }
+
+        user.setCompany(new CompanyID(companyID));
+        userRepository.update(user);
+    }
 
     public boolean userExists(String id) {
         return this.userRepository.get(new UserID(id)) != null;

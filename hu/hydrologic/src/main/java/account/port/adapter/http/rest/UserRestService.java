@@ -1,6 +1,7 @@
 package account.port.adapter.http.rest;
 
 import account.application.UserApplicationService;
+import account.domain.UserException;
 import account.domain.UserID;
 
 public class UserRestService {
@@ -10,7 +11,7 @@ public class UserRestService {
         userApplicationService.userAddSavedLocation(latitude,longitude,name,userID);
     }
 
-    public void addUserToCompany(String userID, String companyID) {
+    public void addUserToCompany(String userID, String companyID) throws UserException {
         userApplicationService.addUserToCompany(userID, companyID);
     }
 
