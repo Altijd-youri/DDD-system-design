@@ -1,6 +1,8 @@
 package weatherEvent.Application;
 
+import account.domain.UserException;
 import weatherEvent.domain.*;
+import weatherEvent.domain.services.CollaborationService;
 import weatherEvent.port.adapter.persistence.MemoryMeasurementStationRepository;
 
 import java.util.Date;
@@ -8,17 +10,16 @@ import java.util.List;
 
 public class StationApplicationService {
     MeasurementStationRepository repository = new MemoryMeasurementStationRepository();
-    WeatherEventApplicationService eventApplication = new WeatherEventApplicationService();
 
     public void weatherEventOnStation(String UidInput, String mStationId, List<List<String>> measurements) throws Exception {
         UserID Uid = new UserID(UidInput);
+
+        CollaborationService collaborationService = new CollaborationService();
+        if(!collaborationService.userExists(Uid)) {
+            throw new UserException("User doesn't exist");
+        }
         MeasurementStation mStation = repository.stationOfUserById(Uid, mStationId);
-
-        Location location = mStation.getLocation();
-
-        WeatherEventID wEventId = eventApplication.newWeatherEvent(UidInput, location.getLongitude(), location.getLatitude(), measurements);
-
-        mStation.addWeatherEvent(wEventId);
+        mStation.addWeatherEvent(measurements);
 
         repository.store(mStation);
     }
