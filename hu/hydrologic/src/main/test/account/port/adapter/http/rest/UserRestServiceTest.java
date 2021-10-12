@@ -1,8 +1,6 @@
-package Account.port.adapter.http.rest;
+package account.port.adapter.http.rest;
 
-import account.application.UserApplicationService;
 import account.domain.*;
-import account.port.adapter.http.rest.UserRestService;
 import account.port.adapter.persistence.MemoryCompanyRepository;
 import account.port.adapter.persistence.MemoryUserRepository;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserRestServiceTest {
+    @Test
+    void userAddSavedLocation() {
+        //assertThrows(Exception.class,()->testMethod());
+    }
+
     @Test
     public void addUserToCompany() throws Exception {
         final UserRestService userRestService = new UserRestService();

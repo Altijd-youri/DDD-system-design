@@ -20,8 +20,6 @@ public class UserApplicationService {
             userRepository.update(user);
             this.savedLocationRepository.store(savedLocation);
         }
-
-
     }
 
     public void addUserToCompany(String userID, String companyID) throws Exception {
